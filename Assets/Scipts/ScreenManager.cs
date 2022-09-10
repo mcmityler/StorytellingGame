@@ -17,8 +17,11 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private FadeScript _fadeScript;
 
     private bool _isTitle, _isHelp, _isSelection, _isCredit, _isGame = false;
-
-
+    GameScript _gameScript;
+    void Awake()
+    {
+        _gameScript = gameObject.GetComponent<GameScript>();
+    }
     public void ChangeScreens()
     {
         //close all open screens
@@ -27,6 +30,10 @@ public class ScreenManager : MonoBehaviour
         _helpScreen.SetActive(_isHelp);
         _creditsScreen.SetActive(_isCredit);
         _gameScreen.SetActive(_isGame);
+        if (_isGame)
+        {
+            _gameScript.StartGame();
+        }
         _isSelection = _isTitle = _isGame = _isCredit = _isHelp = false;
     }
     public void QuitGame()
@@ -36,33 +43,36 @@ public class ScreenManager : MonoBehaviour
 
     public void ScreenSelector(string m_screenToOpen) //Select with buttons what screen to open (sets variable to true that opens screen after its faded black)
     {
-        _isSelection = _isTitle = _isGame = _isCredit = _isHelp = false; //make sure you haven't selected two screens (or else the one on top will be the one that shows)
-        bool m_nonExistent = false;
-        switch (m_screenToOpen)
+        if (!_isSelection && !_isTitle && !_isGame && !_isCredit && !_isHelp) //make sure you cant click 2 buttons before the screen actually changes
         {
-            case "title":
-                _isTitle = true;
-                break;
-            case "selection":
-                _isSelection = true;
-                break;
-            case "help":
-                _isHelp = true;
-                break;
-            case "credits":
-                _isCredit = true;
-                break;
-            case "game":
-                _isGame = true;
-                break;
-            default:
-                Debug.Log(m_screenToOpen + " not existent");
-                m_nonExistent = true;
-                break;
-        }
-        if (m_nonExistent == false)
-        {
-            _fadeScript.FadeBlack();
+            _isSelection = _isTitle = _isGame = _isCredit = _isHelp = false; //make sure you haven't selected two screens (or else the one on top will be the one that shows)
+            bool m_nonExistent = false;
+            switch (m_screenToOpen)
+            {
+                case "title":
+                    _isTitle = true;
+                    break;
+                case "selection":
+                    _isSelection = true;
+                    break;
+                case "help":
+                    _isHelp = true;
+                    break;
+                case "credits":
+                    _isCredit = true;
+                    break;
+                case "game":
+                    _isGame = true;
+                    break;
+                default:
+                    Debug.Log(m_screenToOpen + " not existent");
+                    m_nonExistent = true;
+                    break;
+            }
+            if (m_nonExistent == false)
+            {
+                _fadeScript.FadeBlack();
+            }
         }
     }
 
