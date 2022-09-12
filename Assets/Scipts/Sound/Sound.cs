@@ -10,7 +10,9 @@ Description: This class holds the information about each sound
 public class Sound
 {
     public string name;
-    public AudioClip clip;
+    public AudioClip[] irlSounds;
+
+    public AudioClip pronunciationSound;
 
     [Range(0f,1f)]
     public float volume = 1;
@@ -19,6 +21,6 @@ public class Sound
 
     public bool loop;
 
-    [HideInInspector]
-    public AudioSource source;
+    //[HideInInspector]
+    //public AudioSource source;
 }
