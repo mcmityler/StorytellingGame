@@ -88,7 +88,7 @@ public class GameScript : MonoBehaviour
                 for (int i = 0; i < _wordCount; i++)
                 {
                     int m_randomStart = Random.Range(0, _gameWordBank.Count);
-                    _wordObjects[i].GetComponentInChildren<Image>().sprite = _gameSpriteBank[m_randomStart];
+                    _wordObjects[i].transform.Find("ObjectWordImage").GetComponentInChildren<Image>().sprite = _gameSpriteBank[m_randomStart];
                     _wordObjects[i].GetComponentInChildren<TMP_Text>().text = _gameWordBank[m_randomStart];
                     _gameWordBank.Remove(_gameWordBank[m_randomStart]);
                     _gameSpriteBank.Remove(_gameSpriteBank[m_randomStart]);
@@ -97,7 +97,7 @@ public class GameScript : MonoBehaviour
             else //SINGLE SHUFFLE
             {
                 int m_randomStart = Random.Range(0, _gameWordBank.Count);
-                _wordObjects[m_objectNum].GetComponentInChildren<Image>().sprite = _gameSpriteBank[m_randomStart];
+                _wordObjects[m_objectNum].transform.Find("ObjectWordImage").GetComponent<Image>().sprite = _gameSpriteBank[m_randomStart];
                 _wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text = _gameWordBank[m_randomStart];
                 _gameWordBank.Remove(_gameWordBank[m_randomStart]);
                 _gameSpriteBank.Remove(_gameSpriteBank[m_randomStart]);
