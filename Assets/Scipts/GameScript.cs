@@ -18,6 +18,9 @@ public class GameScript : MonoBehaviour
     {
         _wordCount = m_wordCount;
     }
+    public int GetWordCount(){
+        return _wordCount;
+    }
     public void SetWordDifficulty(string m_difficulty)
     {
         _wordDifficulty = m_difficulty;
@@ -88,8 +91,9 @@ public class GameScript : MonoBehaviour
                 for (int i = 0; i < _wordCount; i++)
                 {
                     int m_randomStart = Random.Range(0, _gameWordBank.Count);
-                    _wordObjects[i].transform.Find("ObjectWordImage").GetComponentInChildren<Image>().sprite = _gameSpriteBank[m_randomStart];
+                    _wordObjects[i].transform.Find("ObjectWordImage").GetComponentInChildren<Image>().sprite = _gameSpriteBank[m_randomStart]; //set new image to random image, also make sure its set to correct child, and not the bg child.
                     _wordObjects[i].GetComponentInChildren<TMP_Text>().text = _gameWordBank[m_randomStart];
+                    DisplayAudioBtn(i);
                     _gameWordBank.Remove(_gameWordBank[m_randomStart]);
                     _gameSpriteBank.Remove(_gameSpriteBank[m_randomStart]);
                 }
@@ -97,8 +101,9 @@ public class GameScript : MonoBehaviour
             else //SINGLE SHUFFLE
             {
                 int m_randomStart = Random.Range(0, _gameWordBank.Count);
-                _wordObjects[m_objectNum].transform.Find("ObjectWordImage").GetComponent<Image>().sprite = _gameSpriteBank[m_randomStart];
+                _wordObjects[m_objectNum].transform.Find("ObjectWordImage").GetComponent<Image>().sprite = _gameSpriteBank[m_randomStart];//set new image to random image, also make sure its set to correct child, and not the bg child.
                 _wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text = _gameWordBank[m_randomStart];
+                DisplayAudioBtn(m_objectNum);
                 _gameWordBank.Remove(_gameWordBank[m_randomStart]);
                 _gameSpriteBank.Remove(_gameSpriteBank[m_randomStart]);
             }
@@ -107,11 +112,29 @@ public class GameScript : MonoBehaviour
         {
             Debug.Log("out of words");
             RefillBank();
+            
             ///remove already used words
             for (int i = 0; i < _wordCount; i++)
             {
-                _gameWordBank.Remove(_wordObjects[i].GetComponentInChildren<TMP_Text>().text);
-                _gameSpriteBank.Remove(_wordObjects[i].GetComponentInChildren<Image>().sprite);
+                if (_gameWordBank.Count > 0)
+                {
+                    int m_m = 0;
+                    foreach (string m_string in _gameWordBank)
+                    {
+                        Debug.Log(i);
+                        if (m_string == _wordObjects[i].GetComponentInChildren<TMP_Text>().text)
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            m_m++;
+                        }
+                    }
+                    _gameWordBank.RemoveAt(m_m);
+                    _gameSpriteBank.RemoveAt(m_m);
+
+                }
             }
 
             RandomizePictures(m_objectNum);
@@ -144,4 +167,36 @@ public class GameScript : MonoBehaviour
             Debug.Log("pronunciation sound played");
         }
     }
+    [SerializeField] private GameObject[] _noSoundObj;
+    void DisplayAudioBtn(int m_objectNum)
+    {
+
+        string _displayAudio = FindObjectOfType<SoundManager>().SoundsExists(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text);
+        GameObject m_noSoundObj = _noSoundObj[m_objectNum];
+        //Debug.Log(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text);
+        switch (_displayAudio)
+        {
+            case "noreference":
+                m_noSoundObj.SetActive(true);
+                m_noSoundObj.GetComponent<TMP_Text>().text = "No Reference";
+                break;
+            case "nosounds":
+                m_noSoundObj.SetActive(true);
+                m_noSoundObj.GetComponent<TMP_Text>().text = "No Sounds";
+                break;
+            case "noirl":
+                m_noSoundObj.SetActive(true);
+                m_noSoundObj.GetComponent<TMP_Text>().text = "No IRL";
+                break;
+            case "nopron":
+                m_noSoundObj.SetActive(true);
+                m_noSoundObj.GetComponent<TMP_Text>().text = "No Pronounce";
+                break;
+            case "hassounds":
+                m_noSoundObj.GetComponent<TMP_Text>().text = "";
+                m_noSoundObj.SetActive(false);
+                break;
+        }
+    }
+    
 }
