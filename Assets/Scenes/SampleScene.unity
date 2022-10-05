@@ -1711,7 +1711,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: ChangeCursors
+        m_MethodName: ChangeCursor
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2153,7 +2153,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: ChangeCursors
+        m_MethodName: ChangeCursor
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2287,7 +2287,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: ChangeCursors
+        m_MethodName: ChangeCursor
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3908,7 +3908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &486553471
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6940,7 +6940,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: ChangeCursors
+        m_MethodName: ChangeCursor
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7307,7 +7307,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: ChangeCursors
+        m_MethodName: ChangeCursor
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10180,81 +10180,123 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ba16b4c768ea534b8306dd768484c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _defaultCursorTexture: {fileID: 2800000, guid: 45ecf5c463bc046469f6b114728aa0a2, type: 3}
-  _pumpkinPieCursorTexture: {fileID: 2800000, guid: c858916755cda854aa36cc4574973cdf, type: 3}
-  _swirlCursorDefault: {fileID: 2800000, guid: 1aca28cf96a20f1489fed36af4e885fb, type: 3}
-  _pumpkinDefaultCursorTexture: {fileID: 2800000, guid: ffa6225dee4df5b4085fadd4522942d8, type: 3}
-  _iceCreamCursorDefault: {fileID: 2800000, guid: f1f7fc742598ff548ad725e297c872cb, type: 3}
-  _candyCornCursorTexture: {fileID: 2800000, guid: ca5dd5b13b45a1e44b5713bb40230814, type: 3}
-  _swirlAnimatedCursorTexture:
-  - {fileID: 2800000, guid: 056c86ca9ac4edc47ba52353217640c3, type: 3}
-  - {fileID: 2800000, guid: 28a13954d079fd54a9faa2e57bcd0cf0, type: 3}
-  - {fileID: 2800000, guid: 4e033097060b01646bc3ffbc5d8059dc, type: 3}
-  - {fileID: 2800000, guid: 5662f3a881e804b4587fade8c0d72a34, type: 3}
-  - {fileID: 2800000, guid: bf297807ed249c74cb9d80b788812dce, type: 3}
-  - {fileID: 2800000, guid: 73cf4fcefcab70d4688fb93f16a288dc, type: 3}
-  - {fileID: 2800000, guid: 49f2d965bf1c5c244b0fa57910efb01c, type: 3}
-  - {fileID: 2800000, guid: 6f83d73a236af5748b1cbd29e4421282, type: 3}
-  - {fileID: 2800000, guid: 2f882c9648c74294f986e35959152073, type: 3}
-  - {fileID: 2800000, guid: 38d477d4b6674aa4190d708a0c008e7d, type: 3}
-  - {fileID: 2800000, guid: 9ab82f06faf76a145b4ef30079482879, type: 3}
-  - {fileID: 2800000, guid: 250010a1009bd4f44aa58aac3059d167, type: 3}
-  - {fileID: 2800000, guid: 41422f9f91e1d0c46b269a6a33783c1e, type: 3}
-  - {fileID: 2800000, guid: 8a51b60146059e3419c81e852a77bd56, type: 3}
-  - {fileID: 2800000, guid: c63c2ccbb7b6a2740960243753e7e913, type: 3}
-  - {fileID: 2800000, guid: 8146caf62678a6245b5fd691e6f4de02, type: 3}
-  - {fileID: 2800000, guid: a079b342e0da60341bc7eb6c320c1dce, type: 3}
-  - {fileID: 2800000, guid: ab4a1230821016844badfa9c914be929, type: 3}
-  - {fileID: 2800000, guid: e3f3ff208148c02439814c3c79e74814, type: 3}
-  - {fileID: 2800000, guid: 07b8c639f0071c64db6eb0ec2ae8211d, type: 3}
-  - {fileID: 2800000, guid: 4a12eb98962d67d4081b6cb90b2a280b, type: 3}
-  - {fileID: 2800000, guid: b12ddb43f9b6d5142a0601d09d989941, type: 3}
-  - {fileID: 2800000, guid: c57e0b681c84cad41b00338fd545e848, type: 3}
-  - {fileID: 2800000, guid: 8b29b499ab45b6447ac4ae919b0db08b, type: 3}
-  - {fileID: 2800000, guid: c6177cf016cb5994aa6b0647b9e442ad, type: 3}
-  - {fileID: 2800000, guid: a2e3b29798ab91040acd3b7e0c091ddb, type: 3}
-  - {fileID: 2800000, guid: 3e18480047da3f94b89a9d110e36051b, type: 3}
-  _jackoAnimatedCursorTexture:
-  - {fileID: 2800000, guid: 42f19597ad2eef24098435036e17ca51, type: 3}
-  - {fileID: 2800000, guid: 083630e3d25c1ec46b3719e05f9f44ae, type: 3}
-  - {fileID: 2800000, guid: ec7acd0f0dfc0d74ba68b3e439ad630f, type: 3}
-  - {fileID: 2800000, guid: 083630e3d25c1ec46b3719e05f9f44ae, type: 3}
-  - {fileID: 2800000, guid: 42f19597ad2eef24098435036e17ca51, type: 3}
-  _pumpkinPieAnimatedCursorTexture:
-  - {fileID: 2800000, guid: b6af93c8352109d48bf41412da55bf02, type: 3}
-  - {fileID: 2800000, guid: b710eedea52912c4bbdd2b73ca8bff05, type: 3}
-  - {fileID: 2800000, guid: 7ff3b0ac79198b04c938afb59a756f2f, type: 3}
-  - {fileID: 2800000, guid: a0788d79e1f10ed4f943a87673794685, type: 3}
-  - {fileID: 2800000, guid: 545138f8c94ad5e448fde1d9b4c5fc56, type: 3}
-  - {fileID: 2800000, guid: 593fd9d5f8d9b0a4896707e155727ae1, type: 3}
-  - {fileID: 2800000, guid: 4657c53fcb71f994280e9d9d160049c1, type: 3}
-  - {fileID: 2800000, guid: 1f027a642a1261641825617beace364b, type: 3}
-  - {fileID: 2800000, guid: c2db2b705295f7a49a6c758fb7a74079, type: 3}
-  - {fileID: 2800000, guid: 93a0d48ee84d0d4479e5de085fa1537f, type: 3}
-  - {fileID: 2800000, guid: 8690ae821ea8d3b46850d37bd427e084, type: 3}
-  - {fileID: 2800000, guid: d77db2b2efa20de4c897111a1bf4fbaf, type: 3}
-  - {fileID: 2800000, guid: 58604fefc5e15bc4492aa7508cd747e6, type: 3}
-  - {fileID: 2800000, guid: b7e47da970cabdc4c877b554cecbfb6c, type: 3}
-  _iceCreamAnimatedCursorTexture:
-  - {fileID: 2800000, guid: f1f7fc742598ff548ad725e297c872cb, type: 3}
-  - {fileID: 2800000, guid: cb66399676306a2488a98578d23a27ed, type: 3}
-  - {fileID: 2800000, guid: 457acc643403ad64089dd6edea680882, type: 3}
-  - {fileID: 2800000, guid: 09b3dfdb7ef8a684893c921111a37ef2, type: 3}
-  - {fileID: 2800000, guid: bf02829f09657bf44928e9262dc5fb9e, type: 3}
-  - {fileID: 2800000, guid: 5010d75aa34279c42ac9c85635be5344, type: 3}
-  - {fileID: 2800000, guid: aebbff25bbf7b8e4a8c38602561d3d8d, type: 3}
-  - {fileID: 2800000, guid: 24b6af985e952e448a2d437c743758e5, type: 3}
-  - {fileID: 2800000, guid: f1127757e8f6e1142bfdef0fd4460c86, type: 3}
-  - {fileID: 2800000, guid: ea7846b1e1618d04fb41452899a57d19, type: 3}
-  - {fileID: 2800000, guid: d25299bbb9785fc4a8ca86ab07eaaddf, type: 3}
-  - {fileID: 2800000, guid: e7c6ed7e5880d1048b8649df680b6da1, type: 3}
-  - {fileID: 2800000, guid: ca907e0bb3673c9409b90d5e9e1f51e6, type: 3}
-  - {fileID: 2800000, guid: f1f7fc742598ff548ad725e297c872cb, type: 3}
-  _swirlTime: 0.1
-  _pumpkinPieTime: 0.3
-  _jackoTime: 0.4
-  _iceCreamTime: 0.2
-  _swirlResetAmount: 0
+  _cursors:
+  - cursorName: Default
+    animated: 0
+    secondPerFrame: 1
+    cooldownTime: 0
+    _cursorTextures:
+    - {fileID: 2800000, guid: 45ecf5c463bc046469f6b114728aa0a2, type: 3}
+  - cursorName: PumpkinPie
+    animated: 0
+    secondPerFrame: 1
+    cooldownTime: 0
+    _cursorTextures:
+    - {fileID: 2800000, guid: c858916755cda854aa36cc4574973cdf, type: 3}
+  - cursorName: Swirl
+    animated: 0
+    secondPerFrame: 1
+    cooldownTime: 0
+    _cursorTextures:
+    - {fileID: 2800000, guid: 1aca28cf96a20f1489fed36af4e885fb, type: 3}
+  - cursorName: SwirlAnimated
+    animated: 1
+    secondPerFrame: 0.1
+    cooldownTime: 0
+    _cursorTextures:
+    - {fileID: 2800000, guid: 056c86ca9ac4edc47ba52353217640c3, type: 3}
+    - {fileID: 2800000, guid: 28a13954d079fd54a9faa2e57bcd0cf0, type: 3}
+    - {fileID: 2800000, guid: 4e033097060b01646bc3ffbc5d8059dc, type: 3}
+    - {fileID: 2800000, guid: 5662f3a881e804b4587fade8c0d72a34, type: 3}
+    - {fileID: 2800000, guid: bf297807ed249c74cb9d80b788812dce, type: 3}
+    - {fileID: 2800000, guid: 73cf4fcefcab70d4688fb93f16a288dc, type: 3}
+    - {fileID: 2800000, guid: 49f2d965bf1c5c244b0fa57910efb01c, type: 3}
+    - {fileID: 2800000, guid: 6f83d73a236af5748b1cbd29e4421282, type: 3}
+    - {fileID: 2800000, guid: 2f882c9648c74294f986e35959152073, type: 3}
+    - {fileID: 2800000, guid: 38d477d4b6674aa4190d708a0c008e7d, type: 3}
+    - {fileID: 2800000, guid: 9ab82f06faf76a145b4ef30079482879, type: 3}
+    - {fileID: 2800000, guid: 250010a1009bd4f44aa58aac3059d167, type: 3}
+    - {fileID: 2800000, guid: 41422f9f91e1d0c46b269a6a33783c1e, type: 3}
+    - {fileID: 2800000, guid: 8a51b60146059e3419c81e852a77bd56, type: 3}
+    - {fileID: 2800000, guid: c63c2ccbb7b6a2740960243753e7e913, type: 3}
+    - {fileID: 2800000, guid: 8146caf62678a6245b5fd691e6f4de02, type: 3}
+    - {fileID: 2800000, guid: a079b342e0da60341bc7eb6c320c1dce, type: 3}
+    - {fileID: 2800000, guid: ab4a1230821016844badfa9c914be929, type: 3}
+    - {fileID: 2800000, guid: e3f3ff208148c02439814c3c79e74814, type: 3}
+    - {fileID: 2800000, guid: 07b8c639f0071c64db6eb0ec2ae8211d, type: 3}
+    - {fileID: 2800000, guid: 4a12eb98962d67d4081b6cb90b2a280b, type: 3}
+    - {fileID: 2800000, guid: b12ddb43f9b6d5142a0601d09d989941, type: 3}
+    - {fileID: 2800000, guid: c57e0b681c84cad41b00338fd545e848, type: 3}
+    - {fileID: 2800000, guid: 8b29b499ab45b6447ac4ae919b0db08b, type: 3}
+    - {fileID: 2800000, guid: c6177cf016cb5994aa6b0647b9e442ad, type: 3}
+    - {fileID: 2800000, guid: a2e3b29798ab91040acd3b7e0c091ddb, type: 3}
+    - {fileID: 2800000, guid: 3e18480047da3f94b89a9d110e36051b, type: 3}
+  - cursorName: Jackolantern
+    animated: 1
+    secondPerFrame: 0.4
+    cooldownTime: 0
+    _cursorTextures:
+    - {fileID: 2800000, guid: 42f19597ad2eef24098435036e17ca51, type: 3}
+    - {fileID: 2800000, guid: 083630e3d25c1ec46b3719e05f9f44ae, type: 3}
+    - {fileID: 2800000, guid: ec7acd0f0dfc0d74ba68b3e439ad630f, type: 3}
+    - {fileID: 2800000, guid: 083630e3d25c1ec46b3719e05f9f44ae, type: 3}
+    - {fileID: 2800000, guid: 42f19597ad2eef24098435036e17ca51, type: 3}
+  - cursorName: PumpkinPieAnimated
+    animated: 1
+    secondPerFrame: 0.3
+    cooldownTime: 0
+    _cursorTextures:
+    - {fileID: 2800000, guid: b6af93c8352109d48bf41412da55bf02, type: 3}
+    - {fileID: 2800000, guid: b710eedea52912c4bbdd2b73ca8bff05, type: 3}
+    - {fileID: 2800000, guid: 7ff3b0ac79198b04c938afb59a756f2f, type: 3}
+    - {fileID: 2800000, guid: a0788d79e1f10ed4f943a87673794685, type: 3}
+    - {fileID: 2800000, guid: 545138f8c94ad5e448fde1d9b4c5fc56, type: 3}
+    - {fileID: 2800000, guid: 593fd9d5f8d9b0a4896707e155727ae1, type: 3}
+    - {fileID: 2800000, guid: 4657c53fcb71f994280e9d9d160049c1, type: 3}
+    - {fileID: 2800000, guid: 1f027a642a1261641825617beace364b, type: 3}
+    - {fileID: 2800000, guid: c2db2b705295f7a49a6c758fb7a74079, type: 3}
+    - {fileID: 2800000, guid: 93a0d48ee84d0d4479e5de085fa1537f, type: 3}
+    - {fileID: 2800000, guid: 8690ae821ea8d3b46850d37bd427e084, type: 3}
+    - {fileID: 2800000, guid: d77db2b2efa20de4c897111a1bf4fbaf, type: 3}
+    - {fileID: 2800000, guid: 58604fefc5e15bc4492aa7508cd747e6, type: 3}
+    - {fileID: 2800000, guid: b7e47da970cabdc4c877b554cecbfb6c, type: 3}
+  - cursorName: IceCream
+    animated: 0
+    secondPerFrame: 1
+    cooldownTime: 0
+    _cursorTextures:
+    - {fileID: 2800000, guid: d2081ffaab8367143a0dff0079aec0cd, type: 3}
+  - cursorName: IceCreamAnimated
+    animated: 1
+    secondPerFrame: 0.2
+    cooldownTime: 0
+    _cursorTextures:
+    - {fileID: 2800000, guid: f1f7fc742598ff548ad725e297c872cb, type: 3}
+    - {fileID: 2800000, guid: cb66399676306a2488a98578d23a27ed, type: 3}
+    - {fileID: 2800000, guid: 457acc643403ad64089dd6edea680882, type: 3}
+    - {fileID: 2800000, guid: 09b3dfdb7ef8a684893c921111a37ef2, type: 3}
+    - {fileID: 2800000, guid: bf02829f09657bf44928e9262dc5fb9e, type: 3}
+    - {fileID: 2800000, guid: 5010d75aa34279c42ac9c85635be5344, type: 3}
+    - {fileID: 2800000, guid: aebbff25bbf7b8e4a8c38602561d3d8d, type: 3}
+    - {fileID: 2800000, guid: 24b6af985e952e448a2d437c743758e5, type: 3}
+    - {fileID: 2800000, guid: f1127757e8f6e1142bfdef0fd4460c86, type: 3}
+    - {fileID: 2800000, guid: ea7846b1e1618d04fb41452899a57d19, type: 3}
+    - {fileID: 2800000, guid: d25299bbb9785fc4a8ca86ab07eaaddf, type: 3}
+    - {fileID: 2800000, guid: e7c6ed7e5880d1048b8649df680b6da1, type: 3}
+    - {fileID: 2800000, guid: ca907e0bb3673c9409b90d5e9e1f51e6, type: 3}
+    - {fileID: 2800000, guid: f1f7fc742598ff548ad725e297c872cb, type: 3}
+  - cursorName: CandyCorn
+    animated: 0
+    secondPerFrame: 1
+    cooldownTime: 0
+    _cursorTextures:
+    - {fileID: 2800000, guid: ca5dd5b13b45a1e44b5713bb40230814, type: 3}
+  - cursorName: Pumpkin
+    animated: 0
+    secondPerFrame: 1
+    cooldownTime: 0
+    _cursorTextures:
+    - {fileID: 2800000, guid: ffa6225dee4df5b4085fadd4522942d8, type: 3}
 --- !u!1 &1230582396
 GameObject:
   m_ObjectHideFlags: 0
@@ -13616,7 +13658,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: ChangeCursors
+        m_MethodName: ChangeCursor
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -13967,7 +14009,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: ChangeCursors
+        m_MethodName: ChangeCursor
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15046,7 +15088,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: ChangeCursors
+        m_MethodName: ChangeCursor
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -15504,7 +15546,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: ChangeCursors
+        m_MethodName: ChangeCursor
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -16698,7 +16740,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: ChangeCursors
+        m_MethodName: ChangeCursor
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
