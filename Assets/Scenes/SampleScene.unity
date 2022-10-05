@@ -1711,14 +1711,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: IceCreamAnimatedCursor
-        m_Mode: 1
+        m_MethodName: ChangeCursors
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: IceCreamAnimated
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &233827291
@@ -2153,14 +2153,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: CandyCornCursor
-        m_Mode: 1
+        m_MethodName: ChangeCursors
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: CandyCorn
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &275228097
@@ -2287,14 +2287,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: JackoAnimatedCursor
-        m_Mode: 1
+        m_MethodName: ChangeCursors
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Jackolantern
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &285662137
@@ -3908,7 +3908,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &486553471
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4259,7 +4259,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: V0.0.5
+  m_text: V0.0.6
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 06c7e9d131222c945b5f638981609cd0, type: 2}
   m_sharedMaterial: {fileID: -4597818327107719, guid: 06c7e9d131222c945b5f638981609cd0, type: 2}
@@ -6490,6 +6490,21 @@ MonoBehaviour:
     volume: 1
     pitch: 1
     loop: 0
+  - name: Cake
+    irlSounds: []
+    pronunciationSound: {fileID: 8300000, guid: 1fea457c85f30b9429e17dcb13c4a656, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+  - name: Car
+    irlSounds:
+    - {fileID: 8300000, guid: 236a19f22038a724496d4568ba564d0e, type: 3}
+    - {fileID: 8300000, guid: 7134abdeda05e0c42a34c67b7cb01d32, type: 3}
+    - {fileID: 8300000, guid: 3ff315cf737f2cd4fb1e0ab3b8916e18, type: 3}
+    pronunciationSound: {fileID: 8300000, guid: ff1f46a2cbd2e424b950ddbde7621af5, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
   - name: Cat
     irlSounds:
     - {fileID: 8300000, guid: 595223f705a9ffa409d2ac4f7269dfb7, type: 3}
@@ -6925,14 +6940,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: DefaultIceCreamCursor
-        m_Mode: 1
+        m_MethodName: ChangeCursors
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: IceCream
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &822654586
@@ -7292,14 +7307,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: SwirlAnimatedCursor
-        m_Mode: 1
+        m_MethodName: ChangeCursors
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: SwirlAnimated
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &849220349
@@ -10128,6 +10143,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b6ec5ad60de1c024a8d2ebcce49e9cf7, type: 3}
   - {fileID: 21300000, guid: 73b8733e9f0453f4db9864c9e614428b, type: 3}
   - {fileID: 21300000, guid: c0a4268c16da8f74d94dfe555baaf7a1, type: 3}
+  - {fileID: 21300000, guid: d3f57190aa0c46e47994dcff762b2f03, type: 3}
   _mediumWordSprites:
   - {fileID: 21300000, guid: 301fe63b380db954e8eaaf3f4244f0af, type: 3}
   - {fileID: 21300000, guid: 5c7d8fc5dedcff1428f9a610adc893c8, type: 3}
@@ -10136,6 +10152,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bd0a87dea0984da4f9112566a4436404, type: 3}
   - {fileID: 21300000, guid: 083b8f83ee50532469051f4ff3a1e6e9, type: 3}
   - {fileID: 21300000, guid: b69ad8df6f5fe80468be77ba7b07168d, type: 3}
+  - {fileID: 21300000, guid: 1a1e153812c4351419d382d2910d8f5f, type: 3}
   _hardWordSprites:
   - {fileID: 21300000, guid: ac1d83ab69aa01246a698bfb83c6ecbb, type: 3}
   - {fileID: 21300000, guid: 28881e0ed608053489222bfeca67d31b, type: 3}
@@ -10168,7 +10185,7 @@ MonoBehaviour:
   _swirlCursorDefault: {fileID: 2800000, guid: 1aca28cf96a20f1489fed36af4e885fb, type: 3}
   _pumpkinDefaultCursorTexture: {fileID: 2800000, guid: ffa6225dee4df5b4085fadd4522942d8, type: 3}
   _iceCreamCursorDefault: {fileID: 2800000, guid: f1f7fc742598ff548ad725e297c872cb, type: 3}
-  _candyCornCursor: {fileID: 2800000, guid: ca5dd5b13b45a1e44b5713bb40230814, type: 3}
+  _candyCornCursorTexture: {fileID: 2800000, guid: ca5dd5b13b45a1e44b5713bb40230814, type: 3}
   _swirlAnimatedCursorTexture:
   - {fileID: 2800000, guid: 056c86ca9ac4edc47ba52353217640c3, type: 3}
   - {fileID: 2800000, guid: 28a13954d079fd54a9faa2e57bcd0cf0, type: 3}
@@ -10235,7 +10252,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: f1f7fc742598ff548ad725e297c872cb, type: 3}
   _swirlTime: 0.1
   _pumpkinPieTime: 0.3
-  _jackoTime: 0.3
+  _jackoTime: 0.4
   _iceCreamTime: 0.2
   _swirlResetAmount: 0
 --- !u!1 &1230582396
@@ -13599,14 +13616,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: PumpkinPieCursor
-        m_Mode: 1
+        m_MethodName: ChangeCursors
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: PumpkinPie
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1786074076
@@ -13950,14 +13967,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: DefaultCursor
-        m_Mode: 1
+        m_MethodName: ChangeCursors
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Default
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1819525786
@@ -15029,14 +15046,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: PumpkinPieAnimatedCursor
-        m_Mode: 1
+        m_MethodName: ChangeCursors
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: PumpkinPieAnimated
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1935050354
@@ -15487,14 +15504,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: DefaultSwirlCursor
-        m_Mode: 1
+        m_MethodName: ChangeCursors
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Swirl
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1960424098
@@ -16681,14 +16698,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1209557761}
         m_TargetAssemblyTypeName: CursorScript, Assembly-CSharp
-        m_MethodName: PumpkinCursor
-        m_Mode: 1
+        m_MethodName: ChangeCursors
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Pumpkin
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &2032753788
