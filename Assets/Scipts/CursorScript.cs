@@ -4,18 +4,43 @@ using UnityEngine;
 
 public class CursorScript : MonoBehaviour
 {
-    [SerializeField] private Texture2D _cursorTexture; //default cursor texture
+    [SerializeField] private Texture2D _defaultCursorTexture; //default cursor texture
     [SerializeField] private Texture2D _pumpkinPieCursorTexture; //pumpkin pie cursor  
-    [SerializeField] private List<Texture2D> _pumpkinCursorTexture; //pumpkin texture (animated)
+    [SerializeField] private Texture2D _swirlCursorDefault; //Swirl default cursor
+    [SerializeField] private Texture2D _pumpkinDefaultCursorTexture; //pumpkin default cursor 
+    [SerializeField] private Texture2D _iceCreamCursorDefault; //icecream default cursor 
+    [SerializeField] private Texture2D _candyCornCursor; //candy Corn  cursor 
+    
+
+
+    
+
+    [SerializeField] private List<Texture2D> _swirlAnimatedCursorTexture; //swirl texture (animated)
+    [SerializeField] private List<Texture2D> _jackoAnimatedCursorTexture; //jackolantern texture (animated)
     [SerializeField] private List<Texture2D> _pumpkinPieAnimatedCursorTexture;//pumpkin pie texture (animated)
+    [SerializeField] private List<Texture2D> _iceCreamAnimatedCursorTexture;//ice cream texture (animated)
 
 
-    private bool _pumpkin = false;
-    private bool _pumpkinPie = false;
+    public enum cursorType {
+        Default,
+        Swirl,
+        SwirlAnimated,
+        Pumpkin,
+        PumpkinPie,
+        PumpkinPieAnimated,
+        IceCream,
+        CandyCorn,
+        Jackolantern,
+        IceCreamAnimated
+    }
+    private cursorType _cursorType = cursorType.Default;
 
-    private int _pumpkinCursorIndex = 0;
-    private float _pumpkinCursorCounter = 0f;
-    [SerializeField] private float _pumpkinTime, _pumpkinPieTime = 1.0f;
+
+    private int _cursorIndex = 0;
+    private float _cursorCounter = 0f;
+    [SerializeField] private float _swirlTime, _pumpkinPieTime, _jackoTime, _iceCreamTime = 1.0f;
+    [SerializeField] private int _swirlResetAmount = 10;
+    private int _swirlResetCounter = 0; //how many revolutions should it do before it resets
 
     
 
@@ -28,63 +53,133 @@ public class CursorScript : MonoBehaviour
         DefaultCursor();
     }
     void Update(){
-        if(_pumpkin){
+        if(_cursorType == cursorType.SwirlAnimated){
             //update cursor form
-            _pumpkinCursorCounter += Time.deltaTime;
-            if(_pumpkinCursorCounter >= _pumpkinTime){
-                _pumpkinCursorCounter = 0f;
-                PumpkinCursor();
+            _cursorCounter += Time.deltaTime;
+            if(_cursorCounter >= _swirlTime){
+                _cursorCounter = 0f;
+                SwirlAnimatedCursor();
             }
         }
-        if(_pumpkinPie){
+        if(_cursorType == cursorType.PumpkinPieAnimated){
             //update cursor form
-            _pumpkinCursorCounter += Time.deltaTime;
-            if(_pumpkinCursorCounter >= _pumpkinPieTime){
-                _pumpkinCursorCounter = 0f;
+            _cursorCounter += Time.deltaTime;
+            if(_cursorCounter >= _pumpkinPieTime){
+                _cursorCounter = 0f;
                 PumpkinPieAnimatedCursor();
+            }
+        }
+         if(_cursorType == cursorType.Jackolantern){
+            //update cursor form
+            _cursorCounter += Time.deltaTime;
+            if(_cursorCounter >= _jackoTime){
+                _cursorCounter = 0f;
+                JackoAnimatedCursor();
+            }
+        }
+        if(_cursorType == cursorType.IceCreamAnimated){
+            //update cursor form
+            _cursorCounter += Time.deltaTime;
+            if(_cursorCounter >= _iceCreamTime){
+                _cursorCounter = 0f;
+                IceCreamAnimatedCursor();
             }
         }
     }
     
     public void DefaultCursor(){
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
         _cursorClickLoc = new Vector2(0, 0);
-        Cursor.SetCursor(_cursorTexture,_cursorClickLoc, CursorMode.Auto);
-        _pumpkin = false;
-        _pumpkinPie = false;
+        Cursor.SetCursor(_defaultCursorTexture,_cursorClickLoc, CursorMode.Auto);
+        _cursorType = cursorType.Default;
     }
     public void PumpkinPieCursor(){
         
         _cursorClickLoc = new Vector2(0, 0);
         Cursor.SetCursor(_pumpkinPieCursorTexture,_cursorClickLoc, CursorMode.Auto);
-        _pumpkin = false;
-        _pumpkinPie = false;
-    }
-    public void PumpkinPieAnimatedCursor(){
-        if(_pumpkinPie == false){
-            _cursorClickLoc = new Vector2(0, 0);
-            _pumpkinCursorIndex = 0;
-        }
-        _pumpkinPie = true;
-        //set cursor texture and increse index to next
-        Cursor.SetCursor(_pumpkinPieAnimatedCursorTexture[_pumpkinCursorIndex++],_cursorClickLoc, CursorMode.Auto);
-        //Reset cursour index back to start if it is over
-        if(_pumpkinCursorIndex >= _pumpkinPieAnimatedCursorTexture.Count){
-            _pumpkinCursorIndex = 0;
-        }
-        _pumpkin = false;
+        _cursorType = cursorType.PumpkinPie;
     }
     public void PumpkinCursor(){
-        if(_pumpkin == false){
-            _cursorClickLoc = new Vector2(0, 0);
-            _pumpkinCursorIndex = 0;
-        }
-        _pumpkin = true;
-        //set cursor texture and increse index to next
-        Cursor.SetCursor(_pumpkinCursorTexture[_pumpkinCursorIndex++],_cursorClickLoc, CursorMode.Auto);
-        //Reset cursour index back to start if it is over
-        if(_pumpkinCursorIndex >= _pumpkinCursorTexture.Count){
-            _pumpkinCursorIndex = 0;
-        }
-        _pumpkinPie = false;
+       _cursorClickLoc = new Vector2(0, 0);
+        Cursor.SetCursor(_pumpkinDefaultCursorTexture,_cursorClickLoc, CursorMode.Auto);
+        _cursorType = cursorType.Pumpkin;
     }
+    public void PumpkinPieAnimatedCursor(){
+        if(_cursorType != cursorType.PumpkinPieAnimated){
+            _cursorClickLoc = new Vector2(0, 0);
+            _cursorIndex = 0;
+        }
+        _cursorType = cursorType.PumpkinPieAnimated;
+        //set cursor texture and increse index to next
+        Cursor.SetCursor(_pumpkinPieAnimatedCursorTexture[_cursorIndex++],_cursorClickLoc, CursorMode.Auto);
+        //Reset cursour index back to start if it is over
+        if(_cursorIndex >= _pumpkinPieAnimatedCursorTexture.Count){
+            _cursorIndex = 0;
+        }
+    }
+    
+    public void SwirlAnimatedCursor(){
+        if(_cursorType != cursorType.SwirlAnimated){
+            _cursorClickLoc = new Vector2(0, 0);
+            _cursorIndex = 0;
+        }
+        _cursorType = cursorType.SwirlAnimated;
+        //set cursor texture and increse index to next
+        Cursor.SetCursor(_swirlAnimatedCursorTexture[_cursorIndex++],_cursorClickLoc, CursorMode.Auto);
+        //Reset cursour index back to start if it is over
+        if(_cursorIndex >= _swirlAnimatedCursorTexture.Count){
+            _swirlResetCounter ++; //counter reset when this runs enough
+            if(_swirlResetCounter >= _swirlResetAmount){
+                
+                _cursorIndex = 0;
+                _swirlResetCounter = 0;
+            }else{
+                _cursorIndex = _swirlAnimatedCursorTexture.Count - 1;
+            }
+        }
+    }
+    
+    public void DefaultSwirlCursor(){
+        _cursorClickLoc = new Vector2(0, 0);
+        Cursor.SetCursor(_swirlCursorDefault,_cursorClickLoc, CursorMode.Auto);
+        _cursorType = cursorType.Swirl;
+    }
+    public void DefaultIceCreamCursor(){
+        _cursorClickLoc = new Vector2(0, 0);
+        Cursor.SetCursor(_iceCreamCursorDefault,_cursorClickLoc, CursorMode.Auto);
+        _cursorType = cursorType.IceCream;
+    }
+    public void CandyCornCursor(){
+        _cursorClickLoc = new Vector2(0, 0);
+        Cursor.SetCursor(_candyCornCursor,_cursorClickLoc, CursorMode.Auto);
+        _cursorType = cursorType.CandyCorn;
+    }
+    public void JackoAnimatedCursor(){
+        if(_cursorType != cursorType.Jackolantern){
+            _cursorClickLoc = new Vector2(0, 0);
+            _cursorIndex = 0;
+        }
+        _cursorType = cursorType.Jackolantern;
+        //set cursor texture and increse index to next
+        Cursor.SetCursor(_jackoAnimatedCursorTexture[_cursorIndex++],_cursorClickLoc, CursorMode.Auto);
+        //Reset cursour index back to start if it is over
+        if(_cursorIndex >= _jackoAnimatedCursorTexture.Count){
+            _cursorIndex = 0;
+        }
+    }
+    public void IceCreamAnimatedCursor(){
+        if(_cursorType != cursorType.IceCreamAnimated){
+            _cursorClickLoc = new Vector2(0, 0);
+            _cursorIndex = 0;
+        }
+        _cursorType = cursorType.IceCreamAnimated;
+        //set cursor texture and increse index to next
+        Cursor.SetCursor(_iceCreamAnimatedCursorTexture[_cursorIndex++],_cursorClickLoc, CursorMode.Auto);
+        //Reset cursour index back to start if it is over
+        if(_cursorIndex >= _iceCreamAnimatedCursorTexture.Count){
+            _cursorIndex = 0;
+        }
+    }
+    
 }

@@ -11,9 +11,12 @@ public class SettingsScript : MonoBehaviour
     {
         if (Input.GetKeyDown("escape"))
         {
+            ToggleSettingScreen();
+        }
+    }
+    public void ToggleSettingScreen(){
             _settingOn = _settingPanel.activeInHierarchy;
             _settingPanel.SetActive(!_settingOn);
             _settingOn = !_settingOn;
-        }
     }
 }
