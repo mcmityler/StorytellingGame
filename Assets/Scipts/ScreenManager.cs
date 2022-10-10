@@ -14,6 +14,8 @@ public class ScreenManager : MonoBehaviour
     [SerializeField] private GameObject _creditsScreen;
     [SerializeField] private GameObject _gameScreen;
 
+    
+    [SerializeField] private Animator QuitCheckAnimator;
     [SerializeField] private FadeScript _fadeScript;
 
     private bool _isTitle, _isHelp, _isSelection, _isCredit, _isGame = false;
@@ -39,6 +41,7 @@ public class ScreenManager : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit(); //Quit the game in the application
+        Debug.Log("Quit game");
     }
 
     public void ScreenSelector(string m_screenToOpen) //Select with buttons what screen to open (sets variable to true that opens screen after its faded black)
@@ -69,11 +72,20 @@ public class ScreenManager : MonoBehaviour
                     m_nonExistent = true;
                     break;
             }
-            if (m_nonExistent == false)
+            if (m_nonExistent == false) //if screen exists fade to black 
             {
                 _fadeScript.FadeBlack();
             }
         }
     }
-
+    public void QuitCheck(bool m_open){
+        Debug.Log("should you open: " + m_open );
+        if(m_open){
+            QuitCheckAnimator.SetTrigger("Open");
+            QuitCheckAnimator.ResetTrigger("Close");
+        }else{
+            QuitCheckAnimator.SetTrigger("Close");
+            QuitCheckAnimator.ResetTrigger("Open");
+        }
+    }
 }

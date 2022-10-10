@@ -12,5 +12,6 @@ public class MouseCursor
     public bool animated = false;
     public float secondPerFrame = 1f;
     public float cooldownTime = 0f;
-    public List<Texture2D> _cursorTextures;
+    public List<Texture2D> cursorTextures;
+    public Vector2 cursorClickLoc = Vector2.zero; //Where should you expect to click when clicking mouse
 }

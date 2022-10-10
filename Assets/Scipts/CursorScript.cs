@@ -10,11 +10,10 @@ public class CursorScript : MonoBehaviour
 {
     [SerializeField] private MouseCursor[] _cursors; // List of all the cursors & details
     private MouseCursor _currentCursor; //what is the current cursor
-    private bool _animated = false; //are you on an animated cursor
     private int _cursorIndex = 0; //what cursor are you currently on
     private float _cursorCounter = 0f; //timer for animation
     private float _animationCooldown = 0f; //how long to wait before animating again
-    private Vector2 _cursorClickLoc = Vector2.zero; //Where should you expect to click when clicking mouse
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -22,16 +21,16 @@ public class CursorScript : MonoBehaviour
     }
     void Update()
     {
-        if (_animated) //check if its an animated cursor
+        if (_currentCursor.animated) //check if its an animated cursor
         {
             _cursorCounter += Time.deltaTime; //count up if its an animated cursor
             if (_cursorCounter >= _currentCursor.secondPerFrame && (_animationCooldown <= 0f))
             {
                 AnimateCursor(); //change cursors animation
             }
-            if (_animationCooldown >= 0f)
+            if (_animationCooldown >= 0f) //cool down for animation
             {
-                _animationCooldown -= Time.deltaTime;
+                _animationCooldown -= Time.deltaTime; //subtract from waiting cooldown time
             }
         }
     }
@@ -54,8 +53,7 @@ public class CursorScript : MonoBehaviour
         else if (m_nameExists == true)
         {
             _cursorIndex = 0;
-            Cursor.SetCursor(_currentCursor._cursorTextures[_cursorIndex], _cursorClickLoc, CursorMode.Auto); //change to correct cursor
-            _animated = _currentCursor.animated;
+            Cursor.SetCursor(_currentCursor.cursorTextures[_cursorIndex], _currentCursor.cursorClickLoc, CursorMode.Auto); //change to correct cursor
         }
     }
     public void AnimateCursor()
@@ -63,12 +61,12 @@ public class CursorScript : MonoBehaviour
         
             _cursorCounter = 0; //reset counter for next frame
 
-            if (_cursorIndex >= _currentCursor._cursorTextures.Count)//Reset cursour index back to start if it is over or if its just starting
+            if (_cursorIndex >= _currentCursor.cursorTextures.Count)//Reset cursour index back to start if it is over or if its just starting
             {
                 _cursorIndex = 0;
                 _animationCooldown = _currentCursor.cooldownTime; //how long to wait before repeating animation
             }
-            Cursor.SetCursor(_currentCursor._cursorTextures[_cursorIndex++], _cursorClickLoc, CursorMode.Auto);//set cursor texture and increase index count
+            Cursor.SetCursor(_currentCursor.cursorTextures[_cursorIndex++], _currentCursor.cursorClickLoc, CursorMode.Auto);//set cursor texture and increase index count
         }
     }
 

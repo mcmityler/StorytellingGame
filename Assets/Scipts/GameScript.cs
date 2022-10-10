@@ -13,12 +13,16 @@ public class GameScript : MonoBehaviour
     [SerializeField] List<Sprite> _easyWordSprites;
     [SerializeField] List<Sprite> _mediumWordSprites;
     [SerializeField] List<Sprite> _hardWordSprites;
+    [SerializeField] List<Sprite> _cartoonSprites;
     [SerializeField] GameObject[] _wordObjects; //goes from 1,2,3,4
+    private Sprite[] _backupIRLSprites = { null, null, null, null };
+    private bool[] _isCartoon = { false, false, false, false };
     public void SetWordCount(int m_wordCount)
     {
         _wordCount = m_wordCount;
     }
-    public int GetWordCount(){
+    public int GetWordCount()
+    {
         return _wordCount;
     }
     public void SetWordDifficulty(string m_difficulty)
@@ -90,29 +94,35 @@ public class GameScript : MonoBehaviour
             {
                 for (int i = 0; i < _wordCount; i++)
                 {
-                    int m_randomStart = Random.Range(0, _gameWordBank.Count);
-                    _wordObjects[i].transform.Find("ObjectWordImage").GetComponentInChildren<Image>().sprite = _gameSpriteBank[m_randomStart]; //set new image to random image, also make sure its set to correct child, and not the bg child.
-                    _wordObjects[i].GetComponentInChildren<TMP_Text>().text = _gameWordBank[m_randomStart];
+                    int m_randomNum = Random.Range(0, _gameWordBank.Count);
+                    _wordObjects[i].transform.Find("ObjectWordImage").GetComponentInChildren<Image>().sprite = _gameSpriteBank[m_randomNum]; //set new image to random image, also make sure its set to correct child, and not the bg child.
+                    _wordObjects[i].GetComponentInChildren<TMP_Text>().text = _gameWordBank[m_randomNum];
+                    _wordObjects[i].transform.Find("ImageToggle").GetComponent<TooltipTrigger>().ResetTiptext();
+                    _backupIRLSprites[i] = _gameSpriteBank[m_randomNum]; //set backup sprite for when turning back to irl image when its a cartoon
+                    _isCartoon[i] = false; //make sure it knows its a real image
                     DisplayAudioBtn(i);
-                    _gameWordBank.Remove(_gameWordBank[m_randomStart]);
-                    _gameSpriteBank.Remove(_gameSpriteBank[m_randomStart]);
+                    _gameWordBank.Remove(_gameWordBank[m_randomNum]);
+                    _gameSpriteBank.Remove(_gameSpriteBank[m_randomNum]);
                 }
             }
             else //SINGLE SHUFFLE
             {
-                int m_randomStart = Random.Range(0, _gameWordBank.Count);
-                _wordObjects[m_objectNum].transform.Find("ObjectWordImage").GetComponent<Image>().sprite = _gameSpriteBank[m_randomStart];//set new image to random image, also make sure its set to correct child, and not the bg child.
-                _wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text = _gameWordBank[m_randomStart];
+                int m_randomNum = Random.Range(0, _gameWordBank.Count);
+                _wordObjects[m_objectNum].transform.Find("ObjectWordImage").GetComponent<Image>().sprite = _gameSpriteBank[m_randomNum];//set new image to random image, also make sure its set to correct child, and not the bg child.
+                _wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text = _gameWordBank[m_randomNum];
+                _wordObjects[m_objectNum].transform.Find("ImageToggle").GetComponent<TooltipTrigger>().ResetTiptext();
+                _backupIRLSprites[m_objectNum] = _gameSpriteBank[m_randomNum]; //set backup sprite for when turning back to irl image when its a cartoon
+                _isCartoon[m_objectNum] = false;//make sure it knows its a real image
                 DisplayAudioBtn(m_objectNum);
-                _gameWordBank.Remove(_gameWordBank[m_randomStart]);
-                _gameSpriteBank.Remove(_gameSpriteBank[m_randomStart]);
+                _gameWordBank.Remove(_gameWordBank[m_randomNum]);
+                _gameSpriteBank.Remove(_gameSpriteBank[m_randomNum]);
             }
         }
         else
         {
             Debug.Log("out of words");
             RefillBank();
-            
+
             ///remove already used words
             for (int i = 0; i < _wordCount; i++)
             {
@@ -198,5 +208,41 @@ public class GameScript : MonoBehaviour
                 break;
         }
     }
-    
+
+    public void ToggleImages(int m_objectNum) //called by button on word objects to change images between IRL and caroon image
+    {
+        string m_currentWord = _wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text; //get what the image is called from the text box
+        bool m_cartoonExists = false; //does the cartoon exist
+        if (_isCartoon[m_objectNum] == false) //if its an irl image set it to a cartoon image
+        {
+            foreach (Sprite m_cartoonImage in _cartoonSprites) //cycle through all cartoons to find correct image and set it
+            {
+                if (m_cartoonImage.name == m_currentWord + "Cartoon")
+                {
+                    m_cartoonExists = true;
+                    _isCartoon[m_objectNum] = true;
+                    _wordObjects[m_objectNum].transform.Find("ObjectWordImage").GetComponent<Image>().sprite = m_cartoonImage;
+                    _wordObjects[m_objectNum].transform.Find("ImageToggle").GetComponent<TooltipTrigger>().ChangeContentTip();
+                    break;
+                }
+            }
+            if (m_cartoonExists == false && _isCartoon[m_objectNum] == false) //no cartoon exists
+            {
+                Debug.Log("no such cartoon: " + m_currentWord);
+                _isCartoon[m_objectNum] = true;
+                _wordObjects[m_objectNum].transform.Find("ObjectWordImage").GetComponent<Image>().sprite = _cartoonSprites[0]; //make it no cartoon image if the cartoon doesnt exist
+            }
+
+        }
+        else if (_isCartoon[m_objectNum] == true) //if its a cartoon set back to irl image
+        {
+            _isCartoon[m_objectNum] = false;
+            _wordObjects[m_objectNum].transform.Find("ObjectWordImage").GetComponent<Image>().sprite = _backupIRLSprites[m_objectNum]; //set image through backup that was set when it was initialized
+            _wordObjects[m_objectNum].transform.Find("ImageToggle").GetComponent<TooltipTrigger>().ChangeContentTip();
+        }
+
+
+
+    }
+
 }
