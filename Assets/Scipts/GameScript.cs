@@ -1,4 +1,7 @@
-using System.Collections;
+/*
+Created By: Tyler McMillan
+Description: This script deals with the main functionality of the word game
+*/
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,59 +9,59 @@ using UnityEngine.UI;
 
 public class GameScript : MonoBehaviour
 {
-    private int _wordCount = 2;
-    private string _wordDifficulty = "easy";
-    [SerializeField] Animator _wordController;
-
-    [SerializeField] List<Sprite> _easyWordSprites;
-    [SerializeField] List<Sprite> _mediumWordSprites;
-    [SerializeField] List<Sprite> _hardWordSprites;
-    [SerializeField] List<Sprite> _cartoonSprites;
-    [SerializeField] GameObject[] _wordObjects; //goes from 1,2,3,4
-    private Sprite[] _backupIRLSprites = { null, null, null, null };
-    private bool[] _isCartoon = { false, false, false, false };
-    public void SetWordCount(int m_wordCount)
+    private int _wordCount = 2; //how many words are in the game (set by buttons on selections screen)
+    private string _wordDifficulty = "easy"; //what is the difficulty of the game (set by buttons on selections screen)
+    [SerializeField] List<Sprite> _easyWordSprites; //list of easy word pictures (real pictures)
+    [SerializeField] List<Sprite> _mediumWordSprites;  //list of medium word pictures (real pictures)
+    [SerializeField] List<Sprite> _hardWordSprites; //list of hard word pictures (real pictures)
+    [SerializeField] List<Sprite> _cartoonSprites; //list of all cartoon pictures
+    [SerializeField] GameObject[] _wordObjects; //gameobjects for words (goes from 1,2,3,4)
+    [SerializeField] Animator _wordController; //animator to make words appear in game screen
+    private Sprite[] _backupIRLSprites = { null, null, null, null }; //place holder for irl image when you click turn to cartoon button
+    private bool[] _isCartoon = { false, false, false, false }; //bool to tell which word objects are on the cartoon or real image (for the tooltip)
+    List<string> _gameWordBank = new List<string>(); //list of words you are using for the game
+    List<Sprite> _gameSpriteBank = new List<Sprite>(); //list of sprites you are using for the game
+    [SerializeField] private GameObject[] _noSoundObj; //gameobject of text that tells player if a sound exists or not
+    public void SetWordCount(int m_wordCount) //set how many word objects to display (from buttons on selection screen)
     {
         _wordCount = m_wordCount;
     }
-    public int GetWordCount()
+    public int GetWordCount()//get how many words you are displaying from another script
     {
         return _wordCount;
     }
-    public void SetWordDifficulty(string m_difficulty)
+    public void SetWordDifficulty(string m_difficulty) //set how difficulty of the words or what word banks to use (from buttons on selection screen)
     {
         _wordDifficulty = m_difficulty;
     }
-    List<string> _gameWordBank = new List<string>();
-    List<Sprite> _gameSpriteBank = new List<Sprite>();
-    public void StartGame()
+    public void StartGame() //called by screen manager script when you click start game button on selection screen
     {
-        Debug.Log("Start game here! " + _wordDifficulty + " difficulty " + _wordCount.ToString() + " words");
-        _wordController.SetInteger("WordCount", _wordCount);
-        RefillBank();
-        RandomizePictures(-1);
+        Debug.Log("Start game here! " + _wordDifficulty + " difficulty " + _wordCount.ToString() + " words"); //output difficulty (easy,medium,or hard) & word amount (2-4)
+        _wordController.SetInteger("WordCount", _wordCount); //animate opening the word objects that are needed (2-4)
+        RefillBank(); //refill gamewordbank with all level of words you want
+        RandomizePictures(-1); //randomize all words that will go into word objects (-1 means shuffle all, 0,1,2,3 indicates which word to shuffle)
     }
-    void RefillBank()
+    void RefillBank() //refill word bank with all words you intend to use
     {
-        _gameWordBank = new List<string>();
-        _gameSpriteBank = new List<Sprite>();
-        if (_wordDifficulty == "easy")
+        _gameWordBank = new List<string>(); //empty word bank
+        _gameSpriteBank = new List<Sprite>(); //empty sprite bank
+        if (_wordDifficulty == "easy") //if easy difficulty add just easy words
         {
             AddEasyWords();
         }
-        else if (_wordDifficulty == "medium")
+        else if (_wordDifficulty == "medium")//if medium difficulty add  easy words & medium words
         {
             AddEasyWords();
             AddMediumWords();
         }
-        else if (_wordDifficulty == "hard")
+        else if (_wordDifficulty == "hard")//if hard difficulty add  easy words & medium words & hard words
         {
             AddEasyWords();
             AddMediumWords();
             AddHardWords();
         }
     }
-    void AddEasyWords()
+    void AddEasyWords() //add easy words to game bank
     {
         foreach (Sprite _sprite in _easyWordSprites)
         {
@@ -67,7 +70,7 @@ public class GameScript : MonoBehaviour
 
         }
     }
-    void AddMediumWords()
+    void AddMediumWords()//add medium words to game bank
     {
         foreach (Sprite _sprite in _mediumWordSprites)
         {
@@ -76,7 +79,7 @@ public class GameScript : MonoBehaviour
 
         }
     }
-    void AddHardWords()
+    void AddHardWords()//add hard words to game bank
     {
         foreach (Sprite _sprite in _hardWordSprites)
         {
@@ -85,7 +88,7 @@ public class GameScript : MonoBehaviour
 
         }
     }
-    public void RandomizePictures(int m_objectNum) //SEND num of object you want to random to shuffle single, send -1 to shuffle all
+    public void RandomizePictures(int m_objectNum) //SEND num of object you want to random to shuffle single, send -1 to shuffle all (-1 means shuffle all, 0,1,2,3 indicates which word to shuffle)
     {
         FindObjectOfType<SoundManager>().StopAllAudio(); //stop audio playing when changing pictures
         if (_gameWordBank.Count >= _wordCount || (m_objectNum != -1 && _gameWordBank.Count > 0)) //make sure enough words left in word bank
@@ -118,13 +121,13 @@ public class GameScript : MonoBehaviour
                 _gameSpriteBank.Remove(_gameSpriteBank[m_randomNum]);
             }
         }
-        else
+        else //if you run out of words while shuffling
         {
             Debug.Log("out of words");
-            RefillBank();
+            RefillBank(); //refill word bank
 
-            ///remove already used words
-            for (int i = 0; i < _wordCount; i++)
+            ///remove already used words (that are currently in word objects so you dont get duplicates on screen)
+            for (int i = 0; i < _wordCount; i++) //cycle entire wordbank to find words that are already in bank
             {
                 if (_gameWordBank.Count > 0)
                 {
@@ -147,15 +150,15 @@ public class GameScript : MonoBehaviour
                 }
             }
 
-            RandomizePictures(m_objectNum);
+            RandomizePictures(m_objectNum); //recall this function but now with a full word bank
         }
     }
 
-    public void PlayAnimalNoise(int m_objectNum)
+    public void PlayAnimalNoise(int m_objectNum) //play animal noise from pressing IRL noise button on game screen word objects
     {
-        bool m_isExistingSound = FindObjectOfType<SoundManager>().PlayAnimal(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text);
-        Debug.Log(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text);
-        if (m_isExistingSound == false)
+        bool m_isExistingSound = FindObjectOfType<SoundManager>().PlayAnimal(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text); //get what the current words noise is from sound manager
+        Debug.Log(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text); //output wordobj word
+        if (m_isExistingSound == false)//tell if sound exists or not
         {
             Debug.Log("irl sound didnt Exist");
         }
@@ -164,11 +167,11 @@ public class GameScript : MonoBehaviour
             Debug.Log("irl sound played");
         }
     }
-    public void PlayPronunciationNoise(int m_objectNum)
+    public void PlayPronunciationNoise(int m_objectNum)  //play pronunciation noise from pressing pronounce noise button on game screen word objects
     {
-        bool m_isExistingSound = FindObjectOfType<SoundManager>().PlayPronunciation(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text);
-        Debug.Log(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text);
-        if (m_isExistingSound == false)
+        bool m_isExistingSound = FindObjectOfType<SoundManager>().PlayPronunciation(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text);//get what the current words noise is from sound manager
+        Debug.Log(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text); //output wordobj word
+        if (m_isExistingSound == false) //tell if sound exists or not
         {
             Debug.Log("pronunciation sound didnt Exist");
         }
@@ -177,29 +180,25 @@ public class GameScript : MonoBehaviour
             Debug.Log("pronunciation sound played");
         }
     }
-    [SerializeField] private GameObject[] _noSoundObj;
-    void DisplayAudioBtn(int m_objectNum)
+    void DisplayAudioBtn(int m_objectNum) //display what sounds are available to user in text box ********** Where to control showing sound buttons
     {
 
         string _displayAudio = FindObjectOfType<SoundManager>().SoundsExists(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text);
         GameObject m_noSoundObj = _noSoundObj[m_objectNum];
+        m_noSoundObj.SetActive(true);
         //Debug.Log(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text);
         switch (_displayAudio)
         {
             case "noreference":
-                m_noSoundObj.SetActive(true);
                 m_noSoundObj.GetComponent<TMP_Text>().text = "No Reference";
                 break;
             case "nosounds":
-                m_noSoundObj.SetActive(true);
                 m_noSoundObj.GetComponent<TMP_Text>().text = "No Sounds";
                 break;
             case "noirl":
-                m_noSoundObj.SetActive(true);
                 m_noSoundObj.GetComponent<TMP_Text>().text = "No IRL";
                 break;
             case "nopron":
-                m_noSoundObj.SetActive(true);
                 m_noSoundObj.GetComponent<TMP_Text>().text = "No Pronounce";
                 break;
             case "hassounds":

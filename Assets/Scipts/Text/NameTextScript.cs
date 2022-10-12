@@ -1,5 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
+/*
+Created By: Tyler McMillan
+Description: This script deals with automatically changing text game object names to whatever the text box has within editor mode (so i dont have to change contents and title everytime)
+*/
 using TMPro;
 using UnityEngine;
 

@@ -34,7 +34,7 @@ Material:
     - _BUILTIN_QueueOffset: 3
     - _DisolveLineSize: 0.05
     - _DissolveSize: 150
-    - _DissolveValue: 0.9999055
+    - _DissolveValue: 0.99981683
     m_Colors:
     - _DissolveColor: {r: 0, g: 0.020942407, b: 0.3193717, a: 1}
   m_BuildTextureStacks: []
