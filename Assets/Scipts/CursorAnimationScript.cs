@@ -1,4 +1,7 @@
-using System.Collections;
+/*
+Created By: Tyler McMillan
+Description: This script deals with animating the cursor bar in the shop menu
+*/
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +20,8 @@ public class CursorAnimationScript : MonoBehaviour
     private bool _animationDone = true;
     private bool _goingRight = false;
     [SerializeField] private Animator _cursorAnimator;
+    
+
     void Update()
     {
         if (_animationDone == false) //update cursor buttons location if the animation is still playing

@@ -2,6 +2,7 @@
 Created By: Tyler McMillan
 Description: This script deals with animating the selection screen buttons
 */
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,19 +10,27 @@ public class SelectionScreenScript : MonoBehaviour
 {
     private int _currentDiceNum = 2;
     private bool _isEasyAnim = false;
-    private string _difficutly = "easy";
+    private Difficulty _difficulty = Difficulty.easy;
+    public enum Difficulty //difficulty num has to match number pressed on button and be in that numbers pos in the array to work
+    {
+        easy = 0,
+        medium = 1,
+        hard = 2,
+    }
 
     [SerializeField] private Animator[] _wordNumAnimators;
     [SerializeField] private Animator[] _difficultyAnimators;
-
+    [SerializeField] private GameScript _gameScript;
+    [SerializeField] private List<HoverTriggerScript> _difficultyHighlightTriggers;
     void OnEnable() //when you enable object set its animations to what they should be
     {
         PlayDiceAnimation(_currentDiceNum);
-        PlayDifficultyAnim(_difficutly);
+        PlayDifficultyAnim((int)_difficulty);
+
     }
     public void PlayDiceAnimation(int m_diceNum) //change dice animation on selection screen
     {
-       // Debug.Log(_diceNum + " "+ _difficutly);
+        // Debug.Log(_diceNum + " "+ _difficutly);
         //*warning* cant call close trigger on all anims or else if it didnt already call it it will wait for an opportunity to call it (use reset trigger to cancel triggering it)
         for (int i = 0; i < _wordNumAnimators.Length; i++) //cycle through all dice animators
         {
@@ -55,35 +64,18 @@ public class SelectionScreenScript : MonoBehaviour
         _isEasyAnim = _wordNumAnimToggle.isOn;
     }
 
-    public void PlayDifficultyAnim(string m_difficulty) //change difficulty animation on selection screen
+    public void PlayDifficultyAnim(int m_difficulty) //change difficulty animation on selection screen  (0 = easy, 1= medium, 2 = hard same as enum)
     {
-        if (m_difficulty != _difficutly) //only change animation if they clicked a button that isnt already highlighted
+        int m_oldDifficulty = (int)_difficulty;
+        if (m_difficulty != m_oldDifficulty) //only change animation if they clicked a button that isnt already highlighted
         {
-            switch (m_difficulty) //animate open of what was pressed
-            {
-                case "easy":
-                    _difficultyAnimators[0].SetTrigger("OpenFade");
-                    break;
-                case "medium":
-                    _difficultyAnimators[1].SetTrigger("OpenFade");
-                    break;
-                case "hard":
-                    _difficultyAnimators[2].SetTrigger("OpenFade");
-                    break;
-            }
-            switch (_difficutly) //close animation of what was just open
-            {
-                case "easy":
-                    _difficultyAnimators[0].SetTrigger("CloseFade");
-                    break;
-                case "medium":
-                    _difficultyAnimators[1].SetTrigger("CloseFade");
-                    break;
-                case "hard":
-                    _difficultyAnimators[2].SetTrigger("CloseFade");
-                    break;
-            }
-            _difficutly = m_difficulty; //update current difficulty
+            _difficultyAnimators[m_difficulty].SetTrigger("OpenFade"); //open fade of button num sent (match array number)
+            _difficultyAnimators[m_oldDifficulty].SetTrigger("CloseFade"); //close fade of last button that was clicked (match array number)
+            _difficultyHighlightTriggers[m_difficulty].ToggleClickedColour(true);
+            _difficultyHighlightTriggers[m_oldDifficulty].ToggleClickedColour(false);
+
+            _difficulty = (Difficulty)m_difficulty; //update difficulty
+            _gameScript.SetWordDifficulty(_difficulty.ToString()); //update difficulty in gamescript
         }
     }
 }

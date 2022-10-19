@@ -10,14 +10,14 @@ public class CursorScript : MonoBehaviour
 {
     [SerializeField] private MouseCursor[] _cursors; // List of all the cursors & details
     private MouseCursor _currentCursor; //what is the current cursor
-    private int _cursorIndex = 0; //what cursor are you currently on
+    private int _cursorIndex = 0; //what cursor frame are you currently on
     private float _cursorCounter = 0f; //timer for animation
     private float _animationCooldown = 0f; //how long to wait before animating again
     
     // Start is called before the first frame update
     void Awake()
     {
-        ChangeCursor("Default"); //set cursor to default cursor
+        ChangeCursor(0); //set cursor to default cursor
     }
     void Update()
     {
@@ -34,12 +34,12 @@ public class CursorScript : MonoBehaviour
             }
         }
     }
-    public void ChangeCursor(string m_cursorName)
+    public void ChangeCursor(int m_cursorNum) //NUMBER NEEDS TO MATCH NUMBER ON BUTTON
     {
         bool m_nameExists = false;
         foreach (MouseCursor m_c in _cursors) //check if the name being called is real
         {
-            if (m_c.cursorName == m_cursorName)
+            if (m_c.CursorNum == m_cursorNum)
             {
                 _currentCursor = m_c;
                 m_nameExists = true; //make sure name exists
@@ -48,7 +48,7 @@ public class CursorScript : MonoBehaviour
         }
         if (m_nameExists == false) //tell user the cursor doesnt exist
         {
-            Debug.Log("Cursor doesnt exist: " + m_cursorName);
+            Debug.Log("Cursor doesnt exist(cursor num): " + m_cursorNum);
         }
         else if (m_nameExists == true)
         {

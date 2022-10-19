@@ -8,13 +8,15 @@ using UnityEngine;
 public class ScreenManager : MonoBehaviour
 {
     //screens
-    [SerializeField] private GameObject _titleScreen; //ref to title screen game obj
+    //[SerializeField] private GameObject _titleScreen; //ref to title screen game obj
     [SerializeField] private GameObject _selectionScreen; //ref to selection screen game obj
     [SerializeField] private GameObject _helpScreen; //ref to help screen game obj
-    [SerializeField] private GameObject _creditsScreen; //ref to credit screen game obj
+    //[SerializeField] private GameObject _creditsScreen; //ref to credit screen game obj
     [SerializeField] private GameObject _gameScreen; //ref to game screen game obj
     [SerializeField] private Animator QuitCheckAnimator; //animator that opens and closes quit check on quit button
     [SerializeField] private FadeScript _fadeScript; //reference to the fade screen script to fade screen in and out on button press
+    [SerializeField] private SettingsScript _settingScript;
+    [SerializeField] private CowExitScript _cowExitScript;
 
     private bool _isTitle, _isHelp, _isSelection, _isCredit, _isGame = false; //what screen button was pressed & what one to change to
     GameScript _gameScript; //reference to game script to start game on start game press
@@ -25,10 +27,10 @@ public class ScreenManager : MonoBehaviour
     public void ChangeScreens() //called when screen is fully faded black
     {
         //close all open screens && open desired screen
-        _titleScreen.SetActive(_isTitle);
+        //_titleScreen.SetActive(_isTitle);
         _selectionScreen.SetActive(_isSelection);
         _helpScreen.SetActive(_isHelp);
-        _creditsScreen.SetActive(_isCredit);
+        //_creditsScreen.SetActive(_isCredit);
         _gameScreen.SetActive(_isGame);
         if (_isGame) //if it was the game screen, start game too
         {
@@ -83,14 +85,17 @@ public class ScreenManager : MonoBehaviour
         {
             QuitCheckAnimator.ResetTrigger("Close");
             QuitCheckAnimator.SetTrigger("Open");
+            _settingScript.SetQuitCheck(true);
         }
         else //close quit check (no button on quit check)
         {
             QuitCheckAnimator.ResetTrigger("Open");
             QuitCheckAnimator.SetTrigger("Close");
-            if (_titleScreen.activeInHierarchy) //if you are on the title screen and you press no lower cow head and disable blocker
+            _settingScript.SetQuitCheck(false);
+
+            if (_cowExitScript.GetButtonPressed()) //if it was open because of title cow exit button then close animation
             {
-                _titleScreen.transform.Find("CowQuit").GetComponent<CowExitScript>().BlockButtons(false);
+                _cowExitScript.BlockButtons(false);
             }
         }
     }

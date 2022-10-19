@@ -14,4 +14,5 @@ public class MouseCursor
     public float cooldownTime = 0f;
     public List<Texture2D> cursorTextures;
     public Vector2 cursorClickLoc = Vector2.zero; //Where should you expect to click when clicking mouse
+    public int CursorNum;
 }
