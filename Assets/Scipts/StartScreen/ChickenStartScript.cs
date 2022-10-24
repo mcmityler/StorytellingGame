@@ -16,6 +16,9 @@ public class ChickenStartScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     [SerializeField] Animator _chickenAnimator; //animator that controls particles and sprite changed and bawk trigger
     private bool _openStart = false; //animation has started to play, so continue to finish
     [SerializeField] HoverTriggerScript _hoverHighlightScript;
+    [SerializeField] Animator _titleAnimator; //animator that controls particles and sprite changed and bawk trigger
+    [SerializeField] Animator _selectionAnimator; //animator that controls particles and sprite changed and bawk trigger
+
 
 
     public void AnimationStarted() //called by chicken start game button so that the animation finishes when clicked and transitions to the next screen
@@ -24,11 +27,10 @@ public class ChickenStartScript : MonoBehaviour, IPointerEnterHandler, IPointerE
 
         _buttonBlocker.gameObject.SetActive(true); //enable object that blocks buttons from being pressed
         _hoverHighlightScript.ToggleClickedColour(true);
+        _chickenAnimator.SetTrigger("ChickenClicked"); //make chicken poof animation start
+
     }
-    public void StartGame() //called by animator when animation is done so that you can move to the next screen (selection screen)
-    {
-        _screenManager.ScreenSelector("selection");
-    }
+
     public void PoofFeather() //play animation on chickent o show feathers poofing
     {
         _featherParticles.Play();
@@ -56,12 +58,35 @@ public class ChickenStartScript : MonoBehaviour, IPointerEnterHandler, IPointerE
         _openStart = false; //can now see enter and exit animations
         _buttonBlocker.gameObject.SetActive(false); //disable object that blocks buttons from being pressed
         _hoverHighlightScript.ToggleClickedColour(false);
-        _chickenAnimator.SetTrigger("ChickenRest"); //reset animation
+        //_chickenAnimator.SetTrigger("ChickenRest"); //reset animation
 
     }
     void OnEnable() //run when gameobject with script is enabled
     {
         ResetChickenButton();
 
+    }
+    public void TitleStartZoomIn() //called by animator when animation is done so that you can move to the next screen (selection screen)
+    {
+        _titleAnimator.SetTrigger("OpenSelection");
+    }
+    public void TitleStartZoomOut() //called by animator when animation is done so that you can move to the next screen (selection screen)
+    {
+        _titleAnimator.SetTrigger("CloseSelection");
+    }
+    public void OpenSelection()
+    {
+        _selectionAnimator.SetTrigger("SelectionOpen");
+
+    }
+    public void CloseSelection()
+    {
+        _selectionAnimator.SetTrigger("SelectionClose");
+
+    }
+    public void BackToTitleChicken(){
+        _chickenAnimator.SetTrigger("BackToTitle");
+        Debug.Log("Reset");
+        ResetChickenButton();
     }
 }

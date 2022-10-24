@@ -1,6 +1,6 @@
 /*
 Created By: Tyler McMillan
-Description: This script deals with cursors and changing them
+Description: This script deals with the current cursor eqipped and its animation
 */
 using System.Collections;
 using System.Collections.Generic;
@@ -8,17 +8,10 @@ using UnityEngine;
 
 public class CursorScript : MonoBehaviour
 {
-    [SerializeField] private MouseCursor[] _cursors; // List of all the cursors & details
-    private MouseCursor _currentCursor; //what is the current cursor
+    [SerializeField] private MouseCursor _currentCursor; //what is the current cursor
     private int _cursorIndex = 0; //what cursor frame are you currently on
     private float _cursorCounter = 0f; //timer for animation
     private float _animationCooldown = 0f; //how long to wait before animating again
-    
-    // Start is called before the first frame update
-    void Awake()
-    {
-        ChangeCursor(0); //set cursor to default cursor
-    }
     void Update()
     {
         if (_currentCursor.animated) //check if its an animated cursor
@@ -34,27 +27,11 @@ public class CursorScript : MonoBehaviour
             }
         }
     }
-    public void ChangeCursor(int m_cursorNum) //NUMBER NEEDS TO MATCH NUMBER ON BUTTON
+    public void ChangeCursor(MouseCursor m_currentCursor) //NUMBER NEEDS TO MATCH NUMBER ON BUTTON
     {
-        bool m_nameExists = false;
-        foreach (MouseCursor m_c in _cursors) //check if the name being called is real
-        {
-            if (m_c.CursorNum == m_cursorNum)
-            {
-                _currentCursor = m_c;
-                m_nameExists = true; //make sure name exists
-                break;
-            }
-        }
-        if (m_nameExists == false) //tell user the cursor doesnt exist
-        {
-            Debug.Log("Cursor doesnt exist(cursor num): " + m_cursorNum);
-        }
-        else if (m_nameExists == true)
-        {
-            _cursorIndex = 0;
-            Cursor.SetCursor(_currentCursor.cursorTextures[_cursorIndex], _currentCursor.cursorClickLoc, CursorMode.Auto); //change to correct cursor
-        }
+        _currentCursor = m_currentCursor;
+        _cursorIndex = 0;
+        Cursor.SetCursor(_currentCursor.cursorTextures[_cursorIndex], _currentCursor.cursorClickLoc, CursorMode.Auto); //change to correct cursor
     }
     public void AnimateCursor()
     {

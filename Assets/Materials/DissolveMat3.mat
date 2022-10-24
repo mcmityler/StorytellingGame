@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: b79458655a9b4d840a48ed64a25bf478, type: 3}
+        m_Texture: {fileID: 2800000, guid: 22ff9e9f088aeea4e9a7432d27a8c555, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Texture2DAsset_eaa0b79dfd154e57aeb79346cc69c765_Out_0:
@@ -34,7 +34,7 @@ Material:
     - _BUILTIN_QueueOffset: 3
     - _DisolveLineSize: 0.05
     - _DissolveSize: 150
-    - _DissolveValue: 0.99981683
+    - _DissolveValue: 0.99971706
     m_Colors:
     - _DissolveColor: {r: 0, g: 0.020942407, b: 0.3193717, a: 1}
   m_BuildTextureStacks: []

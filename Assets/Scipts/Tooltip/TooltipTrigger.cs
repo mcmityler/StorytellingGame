@@ -20,6 +20,7 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     private string _originalContent;//holds first content so you can reset it back if you change the text to another 
     private string _originalHeader; //holds first header so you can reset it back if you change the text to another 
     private int _contentAmount, _headerAmount = 0; //how many headers or contents strings there are
+    [SerializeField] private bool _toolTipEnabled = true;
 
 
     void Awake()
@@ -29,11 +30,11 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
     }
     void Update()
     {
-        if (_showToolTip) //are you hovering something that has a tool tip
+        if (_showToolTip && _toolTipEnabled) //are you hovering something that has a tool tip
         {
             _counter += Time.deltaTime; //start counter
             //when counter is greater then time before tool tip then show tool tip
-            if (_counter > _timeBeforeTooltip) 
+            if (_counter > _timeBeforeTooltip)
             {
                 _showToolTip = false;
                 _toolTipOn = true;
@@ -130,6 +131,10 @@ public class TooltipTrigger : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         }
         _content[0] = _originalContent;
         _header[0] = _originalHeader;
+    }
+    public void SetToolTipEnabled(bool m_enabled) //do you want tool tip to work on not (my use case is in shop when sometings locked i dont want to show its name necessarily)
+    {
+        _toolTipEnabled = m_enabled;
     }
 
 }

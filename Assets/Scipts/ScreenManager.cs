@@ -29,7 +29,7 @@ public class ScreenManager : MonoBehaviour
         //close all open screens && open desired screen
         //_titleScreen.SetActive(_isTitle);
         _selectionScreen.SetActive(_isSelection);
-        _helpScreen.SetActive(_isHelp);
+//        _helpScreen.SetActive(_isHelp);
         //_creditsScreen.SetActive(_isCredit);
         _gameScreen.SetActive(_isGame);
         if (_isGame) //if it was the game screen, start game too
