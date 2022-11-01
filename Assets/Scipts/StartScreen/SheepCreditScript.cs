@@ -23,6 +23,8 @@ public class SheepCreditScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
     private float _hoverCounter = 0f; //counter for hovering before it makes sheep bah
     [SerializeField] private float _hoverTimer = 0.2f; //how long do you have to hover on sheep before it plays this sound
     [SerializeField] HoverTriggerScript _hoverHighlightScript;
+    [SerializeField] CloudSystemScript _cloudSystem;
+
 
 
     void Awake()
@@ -89,11 +91,15 @@ public class SheepCreditScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         _creditScreenAnimator.SetTrigger("OpenCreditScreen");
         _buttonBlocker.SetActive(true);
+        _cloudSystem.ToggleCloudSystem(false);
+
     }
     public void CreditScreenClose()
     {
         _creditScreenAnimator.SetTrigger("CloseCreditScreen");
         _hoverHighlightScript.ToggleClickedColour(false);
+        _cloudSystem.ToggleCloudSystem(true);
+
 
     }
     public void BackToTitle()

@@ -18,6 +18,7 @@ public class ChickenStartScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     [SerializeField] HoverTriggerScript _hoverHighlightScript;
     [SerializeField] Animator _titleAnimator; //animator that controls particles and sprite changed and bawk trigger
     [SerializeField] Animator _selectionAnimator; //animator that controls particles and sprite changed and bawk trigger
+    [SerializeField] CloudSystemScript _cloudSystem;
 
 
 
@@ -77,11 +78,14 @@ public class ChickenStartScript : MonoBehaviour, IPointerEnterHandler, IPointerE
     public void OpenSelection()
     {
         _selectionAnimator.SetTrigger("SelectionOpen");
+        _cloudSystem.ToggleCloudSystem(false);
 
     }
     public void CloseSelection()
     {
         _selectionAnimator.SetTrigger("SelectionClose");
+        _cloudSystem.ToggleCloudSystem(true);
+
 
     }
     public void BackToTitleChicken(){

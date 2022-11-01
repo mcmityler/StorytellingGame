@@ -23,29 +23,19 @@ public class ShuffleWordScript : MonoBehaviour
     [SerializeField] private float _shuffleAnimSpeed = 4;
     [SerializeField] private float _minimumShuffleSpeed = 1;
 
+    [SerializeField] WordColourScript _wordColourScript;
+
 
 
     public void SetRandomSprites(List<Sprite> m_spriteList) //fill what images to use when randoming when you start a game it fills the list with words 
     {
         _randomWordSprites = new List<Sprite>(m_spriteList);
     }
-    public void StartSingleShuffle(int m_wordObjNum)
+    public void StartSingleShuffle(int m_wordObjNum) //single shuffle button
     {
-        if (_overallWordAnimator.isActiveAndEnabled) //disable overall word obj animator to allow images to be shuffled
-        {
-            _overallWordAnimator.enabled = false;
-        }
-        _newWordSprite = null; //reset next words sprite
-        do
-        {
-            _newWordSprite = _gameScript.ShuffleWords(m_wordObjNum); //set next words sprite from words left in current games wordbox (get next word before animation is over so you can play multiple animations easily)
-        } while (_newWordSprite == null);
-        _counter = _amountOfLoops; //set how many loops of the shuffle animation to play
-        _wordObjNumber = m_wordObjNum; //what word obj this is... for game script but not sure  if i really need this
-        _shuffleAnimator.SetFloat("ShuffleSpeed", _shuffleAnimSpeed);
-        _shuffleAnimator.SetTrigger("Shuffle"); //start shuffle animation
+        ShuffleWithDifferentLoopAmount(m_wordObjNum,_amountOfLoops);
     }
-    public void ShuffleWithDifferentLoopAmount(int m_wordObjNum, int m_loopAmount)
+    public void ShuffleWithDifferentLoopAmount(int m_wordObjNum, int m_loopAmount) //shuffle all
     {
         if (_overallWordAnimator.isActiveAndEnabled) //disable overall word obj animator to allow images to be shuffled
         {
@@ -60,6 +50,8 @@ public class ShuffleWordScript : MonoBehaviour
         _wordObjNumber = m_wordObjNum; //what word obj this is... for game script but not sure  if i really need this
         _shuffleAnimator.SetFloat("ShuffleSpeed", _shuffleAnimSpeed);
         _shuffleAnimator.SetTrigger("Shuffle"); //start shuffle animation
+        _wordColourScript.ResetToggle();
+
 
     }
     public void ChangeToRandomImage(int m_shuffleImageObjNum) //0 = normal, 1 = placeholder1, 2 = placeholder2
@@ -95,6 +87,7 @@ public class ShuffleWordScript : MonoBehaviour
         if (_counter < 0)
         {
             _shuffleAnimator.SetTrigger("EndShuffle");
+            _wordColourScript.EnableToggle();
             return;
         }
         //set new shuffle speed below the counter check so it doesnt get a negative speed.
@@ -141,7 +134,7 @@ public class ShuffleWordScript : MonoBehaviour
         _counter = 0;
 
     }
-    public void ToggleBlankText(Toggle m_toggle)
+    public void ToggleBlankText(Toggle m_toggle) //setting to toggle if you want to show words while shuffling or not.
     {
         _blankTextShuffle = m_toggle.isOn;
     }

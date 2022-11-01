@@ -25,13 +25,14 @@ public class SettingsScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("escape")) //escape pressed
+        if (Input.GetKeyDown("p") || Input.GetKeyDown("escape")) //Pressed escape or p (p because of webGl makes escape weird if you are full screen)
         {
             PressedEscape(); //toggle screen on or off
         }
     }
     public void PressedEscape() //slightly different then toggle settings screen function (difference being that if any either shop or setting is open it will close on escape press )
     {
+        
         if (_quitCheckOpen == true)
         {
             _quitCheckAnimator.SetTrigger("Close");

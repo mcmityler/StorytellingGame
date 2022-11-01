@@ -29,7 +29,7 @@ public class ScreenManager : MonoBehaviour
         //close all open screens && open desired screen
         //_titleScreen.SetActive(_isTitle);
         _selectionScreen.SetActive(_isSelection);
-//        _helpScreen.SetActive(_isHelp);
+        //        _helpScreen.SetActive(_isHelp);
         //_creditsScreen.SetActive(_isCredit);
         _gameScreen.SetActive(_isGame);
         if (_isGame) //if it was the game screen, start game too
@@ -40,7 +40,10 @@ public class ScreenManager : MonoBehaviour
     }
     public void QuitGame()
     {
-        Application.Quit(); //Quit the game in the application
+        if (Application.platform != RuntimePlatform.WebGLPlayer) //only quit the game if its in a exe not if its a webGL format.
+        {
+            Application.Quit();
+        }
         Debug.Log("Quit game"); // for testing to know when you quit in editor
     }
 
