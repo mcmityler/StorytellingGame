@@ -69,13 +69,22 @@ public class SelectionScreenScript : MonoBehaviour
         int m_oldDifficulty = (int)_difficulty;
         if (m_difficulty != m_oldDifficulty) //only change animation if they clicked a button that isnt already highlighted
         {
-            _difficultyAnimators[m_difficulty].SetTrigger("OpenFade"); //open fade of button num sent (match array number)
-            _difficultyAnimators[m_oldDifficulty].SetTrigger("CloseFade"); //close fade of last button that was clicked (match array number)
+            //_difficultyAnimators[m_difficulty].SetTrigger("OpenFade"); //open fade of button num sent (match array number)
+            //_difficultyAnimators[m_oldDifficulty].SetTrigger("CloseFade"); //close fade of last button that was clicked (match array number)
             _difficultyHighlightTriggers[m_difficulty].ToggleClickedColour(true);
             _difficultyHighlightTriggers[m_oldDifficulty].ToggleClickedColour(false);
 
-            _difficulty = (Difficulty)m_difficulty; //update difficulty
+            _difficulty = (Difficulty)m_difficulty; //convert difficulty from number to string / enum
             _gameScript.SetWordDifficulty(_difficulty.ToString()); //update difficulty in gamescript
         }
+    }
+    public void EasyButtonClick(){
+        FindObjectOfType<SoundManager>().PlaySound("EasyButtonClick");
+    }
+    public void MediumButtonClick(){
+        FindObjectOfType<SoundManager>().PlayAnimal("Chicken");
+    }
+    public void HardButtonClick(){
+        FindObjectOfType<SoundManager>().PlayAnimal("Rooster");
     }
 }

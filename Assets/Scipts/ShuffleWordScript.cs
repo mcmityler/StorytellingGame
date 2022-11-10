@@ -33,7 +33,8 @@ public class ShuffleWordScript : MonoBehaviour
     }
     public void StartSingleShuffle(int m_wordObjNum) //single shuffle button
     {
-        ShuffleWithDifferentLoopAmount(m_wordObjNum,_amountOfLoops);
+        ShuffleWithDifferentLoopAmount(m_wordObjNum, _amountOfLoops);
+        FindObjectOfType<SoundManager>().PlaySound("ButtonClick");
     }
     public void ShuffleWithDifferentLoopAmount(int m_wordObjNum, int m_loopAmount) //shuffle all
     {
@@ -137,5 +138,11 @@ public class ShuffleWordScript : MonoBehaviour
     public void ToggleBlankText(Toggle m_toggle) //setting to toggle if you want to show words while shuffling or not.
     {
         _blankTextShuffle = m_toggle.isOn;
+    }
+    public void SpinClickSound()
+    {
+        //this.gameObject.GetComponent<AudioSource>().Play();
+    FindObjectOfType<SoundManager>().PlaySound("WheelClick");
+
     }
 }

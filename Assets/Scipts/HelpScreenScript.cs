@@ -12,9 +12,10 @@ public class HelpScreenScript : MonoBehaviour
     [SerializeField] HoverTriggerScript _hoverTrigger;
     [SerializeField] TMP_Text _helpBodyText;
 
-    [SerializeField] [TextArea(5, 4)] List<string> _helpBodyStrings;
+    [SerializeField][TextArea(5, 4)] List<string> _helpBodyStrings;
     private int _currentPage = 0;
     [SerializeField] TMP_Text _pageCountText;
+    [SerializeField] TooltipTrigger _helpToolTip;
     void Awake()
     {
         ChangeText(); //set to first text page
@@ -59,17 +60,26 @@ public class HelpScreenScript : MonoBehaviour
         _helpBodyText.text = _helpBodyStrings[_currentPage];
         _pageCountText.text = (_currentPage + 1).ToString() + "/" + _helpBodyStrings.Count.ToString();
     }
-    public void PlayEraseSound(){
+    public void PlayEraseSound()
+    {
         FindObjectOfType<SoundManager>().PlaySound("Erase");
     }
     public void OpenHelpScreen()
     {
         _helpScreenAnimator.SetTrigger("OpenHelp");
         _hoverTrigger.enabled = false;
+        FindObjectOfType<SoundManager>().PlaySound("ButtonClick");
+        _helpToolTip.SetToolTipEnabled(false);
+
+
     }
     public void CloseHelpScreen()
     {
         _helpScreenAnimator.SetTrigger("CloseHelp");
         _hoverTrigger.enabled = true;
+        FindObjectOfType<SoundManager>().PlaySound("ButtonClick");
+        _helpToolTip.SetToolTipEnabled(true);
+
+
     }
 }

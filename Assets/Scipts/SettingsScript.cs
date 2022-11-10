@@ -32,6 +32,7 @@ public class SettingsScript : MonoBehaviour
     }
     public void PressedEscape() //slightly different then toggle settings screen function (difference being that if any either shop or setting is open it will close on escape press )
     {
+        FindObjectOfType<SoundManager>().PlaySound("ButtonClick");
         
         if (_quitCheckOpen == true)
         {
@@ -65,6 +66,8 @@ public class SettingsScript : MonoBehaviour
     }
     public void ToggleSettingScreen() //toggle settings panel on or off
     {
+        FindObjectOfType<SoundManager>().PlaySound("ButtonClick");
+
         if (_settingsOpen == false) //if you are opening the shop, play open ticket animation to show player their ticket amount
         {
             _shopOpen = false;
@@ -80,6 +83,8 @@ public class SettingsScript : MonoBehaviour
     }
     public void ToggleShopScreen() //toggle shop panel on or off
     {
+        FindObjectOfType<SoundManager>().PlaySound("ButtonClick");
+
         if (_shopOpen == false) //if you are opening the shop, play open ticket animation to show player their ticket amount
         {
             _shopOpen = true;

@@ -83,6 +83,7 @@ public class ScreenManager : MonoBehaviour
     }
     public void QuitCheck(bool m_open) //called by buttons to open quit check screen
     {
+        
         // Debug.Log("should you open: " + m_open);
         if (m_open) //open quit check (cow quit button // Setting quit button)
         {
@@ -101,5 +102,9 @@ public class ScreenManager : MonoBehaviour
                 _cowExitScript.BlockButtons(false);
             }
         }
+    }
+    public void QuitButtonSound(){
+        FindObjectOfType<SoundManager>().PlaySound("ButtonClick");
+
     }
 }

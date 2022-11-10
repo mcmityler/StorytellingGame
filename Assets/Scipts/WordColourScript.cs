@@ -17,16 +17,22 @@ public class WordColourScript : MonoBehaviour
         {
             _wordObjBackground.GetComponent<Image>().color = _usedColor;
 
-        }else{
+        }
+        else
+        {
             _wordObjBackground.GetComponent<Image>().color = _newColor;
         }
+        FindObjectOfType<SoundManager>().PlaySound("ButtonClick"); //button click sound when toggle is pressed
+
     }
-    public void ResetToggle(){
+    public void ResetToggle()
+    {
         _bgWordToggle.isOn = false;
         _wordObjBackground.GetComponent<Image>().color = _newColor;
         _bgWordToggle.interactable = false;
     }
-    public void EnableToggle(){
+    public void EnableToggle()
+    {
         _bgWordToggle.interactable = true;
 
     }

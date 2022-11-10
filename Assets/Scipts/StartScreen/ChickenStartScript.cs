@@ -88,9 +88,12 @@ public class ChickenStartScript : MonoBehaviour, IPointerEnterHandler, IPointerE
 
 
     }
-    public void BackToTitleChicken(){
+    public void BackToTitleChicken()
+    {
         _chickenAnimator.SetTrigger("BackToTitle");
         Debug.Log("Reset");
         ResetChickenButton();
+        FindObjectOfType<SoundManager>().PlaySound("ButtonClick");
+
     }
 }

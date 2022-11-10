@@ -106,6 +106,8 @@ public class SheepCreditScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         _sheepAnimator.SetTrigger("BackToTitle");
         SheepColorChange();
+        _soundManager.PlaySound("ButtonClick");
+
 
     }
     public void CloseButtonBlocker()
@@ -131,6 +133,8 @@ public class SheepCreditScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public void OpenCreditDocument()
     {
         Application.OpenURL("https://docs.google.com/document/d/1OjOGnWkLM-nYdLfWpYDo36uKYdJsHYqqzmlC2kldV5M/edit?usp=sharing");
+        _soundManager.PlaySound("ButtonClick");
+
     }
     public void linkedInURL()
     {
@@ -148,11 +152,16 @@ public class SheepCreditScript : MonoBehaviour, IPointerEnterHandler, IPointerEx
     {
         _creditCheckAnimator.SetTrigger("OpenCreditCheck");
         _settingScript.SetCreditCheck(true); //so it knows its open to press escape on
+        _soundManager.PlaySound("ButtonClick");
+
     }
     public void CloseCreditCheck()
     {
         _creditCheckAnimator.SetTrigger("CloseCreditCheck");
         _settingScript.SetCreditCheck(false);//so it knows its closed to press escape to affect setting screen instead of this check box
+        _soundManager.PlaySound("ButtonClick");
+
+
 
 
     }

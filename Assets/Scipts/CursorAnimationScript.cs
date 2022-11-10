@@ -20,13 +20,14 @@ public class CursorAnimationScript : MonoBehaviour
     private bool _animationDone = true;
     private bool _goingRight = false;
     [SerializeField] private Animator _cursorAnimator;
-    
+
 
     void Update()
     {
         if (_animationDone == false) //update cursor buttons location if the animation is still playing
         {
             PlaySlideAnimation();
+
         }
 
     }
@@ -57,10 +58,12 @@ public class CursorAnimationScript : MonoBehaviour
                 }
             }
         }
+
     }
 
     public void SlidenimationDone()
     {
+
         _animationDone = true; //let script know animation is now complete
         //add or subtract from counters depending if going left or right
         if (_goingRight)
@@ -108,5 +111,7 @@ public class CursorAnimationScript : MonoBehaviour
         }
         _animationDone = false; //let script know animation in progress
         _goingRight = m_goingRight; //let script know direction clicked
+        FindObjectOfType<SoundManager>().PlaySound("ButtonClick");
+
     }
 }
