@@ -28,6 +28,7 @@ public class GameScript : MonoBehaviour
     float _shuffleCountdownCounter = 0f;
     [SerializeField] private float _timeBeforeStartShuffle = 3f;
     bool _refill = false;
+    bool _tutorialDone = false;
     public void SetWordCount(int m_wordCount) //set how many word objects to display (from buttons on selection screen)
     {
         _wordCount = m_wordCount;
@@ -42,17 +43,20 @@ public class GameScript : MonoBehaviour
     }
     public void StartGame() //called by screen manager script when you click start game button on selection screen
     {
-        Debug.Log("Start game here! " + _wordDifficulty + " difficulty " + _wordCount.ToString() + " words"); //output difficulty (easy,medium,or hard) & word amount (2-4)
-        _wordController.SetInteger("WordCount", _wordCount); //animate opening the word objects that are needed (2-4)
-        _refill = false;// its a new game not a refill , so set random shuffle sprite images
-        RefillBank(); //refill gamewordbank with all level of words you want
-        for (int i = 0; i < _wordCount; i++)
+        if (_tutorialDone)
         {
-            _wordObjects[i].transform.Find("ObjectWordImage").GetComponentInChildren<Image>().sprite = _questionMarkSprite;
+            Debug.Log("Start game here! " + _wordDifficulty + " difficulty " + _wordCount.ToString() + " words"); //output difficulty (easy,medium,or hard) & word amount (2-4)
+            _wordController.SetInteger("WordCount", _wordCount); //animate opening the word objects that are needed (2-4)
+            _refill = false;// its a new game not a refill , so set random shuffle sprite images
+            RefillBank(); //refill gamewordbank with all level of words you want
+            for (int i = 0; i < _wordCount; i++)
+            {
+                _wordObjects[i].transform.Find("ObjectWordImage").GetComponentInChildren<Image>().sprite = _questionMarkSprite;
 
-            //_wordObjects[i].GetComponentInChildren<TMP_Text>().text = "???";
+                //_wordObjects[i].GetComponentInChildren<TMP_Text>().text = "???";
+            }
+            _shuffleCountdownStart = true;
         }
-        _shuffleCountdownStart = true;
         //RandomizePictures(-1); //randomize all words that will go into word objects (-1 means shuffle all, 0,1,2,3 indicates which word to shuffle)
     }
     void Update()
@@ -125,10 +129,13 @@ public class GameScript : MonoBehaviour
     }
     public void ShuffleAll() //shuffle all words with a different loop amount that will delay them appearing all at the same time
     {
-        for (int i = 0; i < _wordCount; i++)
+        if (_tutorialDone)
         {
-            _shuffleWordScript[i].ShuffleWithDifferentLoopAmount(i, (6 + (i * 3))); //shuffle all words but with different times so they appear at different times  formula is: (baseLoopNum + (wordNumImOn * howManExtraLoops))
+            for (int i = 0; i < _wordCount; i++)
+            {
+                _shuffleWordScript[i].ShuffleWithDifferentLoopAmount(i, (6 + (i * 3))); //shuffle all words but with different times so they appear at different times  formula is: (baseLoopNum + (wordNumImOn * howManExtraLoops))
 
+            }
         }
     }
     public Sprite ShuffleWords(int m_objectNum) //SEND num of object you want to random to shuffle single, send -1 to shuffle all (-1 means shuffle all, 0,1,2,3 indicates which word to shuffle)
@@ -143,7 +150,7 @@ public class GameScript : MonoBehaviour
             _backupIRLSprites[m_objectNum] = _gameSpriteBank[m_randomNum]; //set backup sprite for when turning back to irl image when its a cartoon
             Debug.Log(_backupIRLSprites[m_objectNum].name + " backup");
             _isCartoon[m_objectNum] = false;//make sure it knows its a real image
-            DisplayAudioBtn(m_objectNum);
+                                            // DisplayAudioBtn(m_objectNum); //show text that shows if sound exists
             _gameWordBank.RemoveAt(m_randomNum);
             _gameSpriteBank.RemoveAt(m_randomNum);
             return _backupIRLSprites[m_objectNum];
@@ -169,6 +176,7 @@ public class GameScript : MonoBehaviour
         Debug.Log(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text); //output wordobj word
         if (m_isExistingSound == false)//tell if sound exists or not
         {
+            FindObjectOfType<SoundManager>().PlayAnimal("NoIRLSound");
             Debug.Log("irl sound didnt Exist");
         }
         else
@@ -183,6 +191,7 @@ public class GameScript : MonoBehaviour
         if (m_isExistingSound == false) //tell if sound exists or not
         {
             Debug.Log("pronunciation sound didnt Exist");
+            FindObjectOfType<SoundManager>().PlayPronunciation("NoIRLSound");
         }
         else
         {
@@ -194,7 +203,7 @@ public class GameScript : MonoBehaviour
 
         string _displayAudio = FindObjectOfType<SoundManager>().SoundsExists(_backupIRLSprites[m_objectNum].name);
         GameObject m_noSoundObj = _noSoundObj[m_objectNum];
-        m_noSoundObj.SetActive(true);
+        //m_noSoundObj.SetActive(true); //----------------------------------------------------------------------------SET ACTIVE TO USE
         //Debug.Log(_wordObjects[m_objectNum].GetComponentInChildren<TMP_Text>().text);
         switch (_displayAudio)
         {
@@ -251,6 +260,10 @@ public class GameScript : MonoBehaviour
 
 
 
+    }
+    public void SetTutorialDone(bool m_tutorialDone)
+    {
+        _tutorialDone = m_tutorialDone;
     }
 
 }
