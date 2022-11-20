@@ -17969,7 +17969,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 300, y: 113.21001}
+  m_SizeDelta: {x: 300, y: 112.02}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &684682661
 Animator:
@@ -52032,8 +52032,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Credits
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: bb2d39aa3ce97c64b935e4d114916020, type: 2}
+  m_sharedMaterial: {fileID: -4597818327107719, guid: bb2d39aa3ce97c64b935e4d114916020, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -52542,8 +52542,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 83.955, y: -24.12}
-  m_SizeDelta: {x: 167.91, y: 48.24}
+  m_AnchoredPosition: {x: 115.145, y: -25.005}
+  m_SizeDelta: {x: 230.29, y: 50.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1663423619
 CanvasRenderer:
@@ -52577,8 +52577,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4863a39f5427ac747b438043e946be52, type: 2}
-  m_sharedMaterial: {fileID: -7394847972733776359, guid: 4863a39f5427ac747b438043e946be52, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dfff87ddc2193da4fbba14bef6e3edca, type: 2}
+  m_sharedMaterial: {fileID: 7253258861393265524, guid: dfff87ddc2193da4fbba14bef6e3edca, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -52641,7 +52641,7 @@ MonoBehaviour:
   m_margin: {x: 10, y: 10, z: 10, w: 10}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!1 &1672059123
@@ -60091,8 +60091,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: This is a test to see if this will be good or abd
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 4863a39f5427ac747b438043e946be52, type: 2}
-  m_sharedMaterial: {fileID: -7394847972733776359, guid: 4863a39f5427ac747b438043e946be52, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: dfff87ddc2193da4fbba14bef6e3edca, type: 2}
+  m_sharedMaterial: {fileID: 7253258861393265524, guid: dfff87ddc2193da4fbba14bef6e3edca, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -60155,7 +60155,7 @@ MonoBehaviour:
   m_margin: {x: 10, y: 10, z: 10, w: 10}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 1
+  m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
 --- !u!222 &1803509643
@@ -60183,8 +60183,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 150, y: -80.725006}
-  m_SizeDelta: {x: 300, y: 64.97}
+  m_AnchoredPosition: {x: 150, y: -81.015}
+  m_SizeDelta: {x: 300, y: 62.01}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1814712954
 GameObject:
